@@ -2,6 +2,7 @@ from ekphrasis.classes.preprocessor import TextPreProcessor
 from ekphrasis.classes.tokenizer import SocialTokenizer
 from ekphrasis.dicts.emoticons import emoticons
 
+
 text_processor = TextPreProcessor(
     # terms that will be normalized
     normalize=['url', 'email', 'percent', 'money', 'phone', 'user',
@@ -31,6 +32,5 @@ text_processor = TextPreProcessor(
     # with other expressions. You can pass more than one dictionaries.
     dicts=[emoticons]
 )
-
 def annotation_normalization(raw):
     return " ".join(text_processor.pre_process_doc(raw))

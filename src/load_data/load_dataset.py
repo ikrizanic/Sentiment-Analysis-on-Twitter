@@ -1,12 +1,11 @@
-from podium.datasets import Iterator
-from podium.storage import Vocab, Field, LabelField, MultioutputField
-from podium.storage.vectorizers.tfidf import CountVectorizer
-from podium.datasets import TabularDataset
-import functools
 import spacy
+from podium.storage import Vocab, Field, LabelField, MultioutputField
+from podium.datasets import TabularDataset
+from src.hooks.annotation_normalization import *
+from src.hooks.pretokenization import *
+
 
 def load_dataset(dataset_path):
-    print("Loading dataset from: " + dataset_path + "\n")
     nlp = spacy.load('en_core_web_lg', disable=["parser", "ner"])
 
     def extract_text_hook(raw, tokenized):
@@ -15,22 +14,23 @@ def load_dataset(dataset_path):
     def extract_pos_hook(raw, tokenized):
         return raw, [token.pos_ for token in tokenized]
 
-    def extract_vec_hook(raw, tokenized):
-        return raw, [token.vector_norm for token in tokenized]
+    tweet = Field(name='tweet', vocab=Vocab(), store_as_raw=True, tokenizer=nlp)
+    anot = Field(name="anot", vocab=Vocab(), store_as_raw=True, tokenize=False)
+    pos = Field(name='pos', vocab=Vocab(), tokenizer=nlp)
+    label = LabelField(name='label')
 
-    text = Field(name='text', vocab=Vocab(), store_as_raw=True)
-    text.add_posttokenize_hook(extract_text_hook)
+    tweet.add_pretokenize_hook(repair_chars)
+    tweet.add_pretokenize_hook(remove_usernames)
+    tweet.add_pretokenize_hook(remove_links)
 
-    pos = Field(name='pos', vocab=Vocab())
+    anot.add_pretokenize_hook(repair_chars)
+    anot.add_pretokenize_hook(annotation_normalization)
+
+    tweet.add_posttokenize_hook(extract_text_hook)
     pos.add_posttokenize_hook(extract_pos_hook)
 
-    # vec = Field(name='vec')
-    # vec.add_posttokenize_hook(extract_vec_hook)
+    fields = {'text': (tweet, anot, pos), 'label': label}
 
-    text = MultioutputField([text, pos], tokenizer=nlp)
-
-    label = LabelField(name='label')
-    fields = {'text': text, 'label': label}
-
+    print("Loading dataset from: " + dataset_path + "\n")
     return TabularDataset(dataset_path, format='tsv', fields=fields)
 

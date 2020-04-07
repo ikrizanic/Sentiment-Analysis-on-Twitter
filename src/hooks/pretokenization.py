@@ -27,8 +27,12 @@ def read_raw_tweets(data_path, sep="\t"):
     raw_data_merge = pd.read_csv(data_path, sep=sep, names=["label", "text"])
     clean_data = dict()
     for i in (range(len(raw_data_merge))):
-        if raw_data_merge.text[i] not in clean_data and isinstance(raw_data_merge.text[i], str):
-            clean_data.update({raw_data_merge.text[i]: raw_data_merge.label[i]})
+        tweet = raw_data_merge.text[i]
+        if tweet not in clean_data and isinstance(tweet, str):
+            tweet = repair_chars(tweet)
+            tweet = remove_usernames(tweet)
+            tweet = remove_links(tweet)
+            clean_data.update({tweet: raw_data_merge.label[i]})
 
     tweets = list()
     polarities = list()
@@ -38,6 +42,7 @@ def read_raw_tweets(data_path, sep="\t"):
 
     for polarity in clean_data.values():
         polarities.append(polarity)
+
     return tweets, polarities
 
 
