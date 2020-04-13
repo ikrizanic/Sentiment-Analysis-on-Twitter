@@ -1,4 +1,4 @@
-from anew_extraction import *
+from src.feature_extraction.anew_extraction import *
 
 
 def calculate_anew(tokens, mean=True, median=True):

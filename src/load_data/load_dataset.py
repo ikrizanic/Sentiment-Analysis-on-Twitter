@@ -1,10 +1,10 @@
 import spacy
-from podium.storage import Vocab, Field, LabelField, MultioutputField
+from podium.storage import Vocab, Field, LabelField
 from podium.datasets import TabularDataset
 
-from spell_check import *
-from annotation_normalization import *
-from pretokenization import *
+from src.hooks.spell_check import *
+from src.hooks.annotation_normalization import *
+from src.hooks.pretokenization import *
 
 
 def load_dataset(dataset_path):

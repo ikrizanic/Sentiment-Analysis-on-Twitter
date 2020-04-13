@@ -95,7 +95,7 @@ def find_useful_emoticons(emoticons_path, data_path):
 
 def replace_unuseful_emoticons(raw):
     for k, v in EMOTICONS.items():
-        if k in useful_emoticons.keys() and k in raw:
+        if k not in useful_emoticons.keys() and k in raw:
             raw.replace(k, v)
     return raw
 
