@@ -1,6 +1,10 @@
 import re
 import pandas as pd
+import string
 
+
+def remove_punctuation(raw):
+    return raw.translate(str.maketrans('', '', string.punctuation))
 
 def remove_links(raw):
     raw = re.sub(r'http.*\b', '', raw)
@@ -98,4 +102,7 @@ def replace_unuseful_emoticons(raw):
         if k not in useful_emoticons.keys() and k in raw:
             raw.replace(k, v)
     return raw
+
+
+
 

@@ -59,3 +59,7 @@ def get_anew_median(tokens):
     if len(d) == 0:
         d.append(0)
     return statistics.median(v), statistics.median(a), statistics.median(d)
+
+def get_anew_sum(tokens):
+    v, a, d = get_anew_scores(tokens)
+    return sum(v), sum(a), sum(d)

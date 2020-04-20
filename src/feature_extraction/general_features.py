@@ -13,9 +13,11 @@ def calculate_anew(tokens, mean=True, median=True):
         else:
             print("Nothing to return!")
 
-def get_anew(text_tokens, mean=True, median=True):
+def get_anew(text_tokens, mean=True, median=True, sum=True):
     features = [list() for i in range(len(text_tokens))]
     for i in range(len(text_tokens)):
         features[i].extend(calculate_anew(text_tokens[i], mean, median))
+        if sum:
+            features[i].extend(get_anew_sum(text_tokens[i]))
     return features
 

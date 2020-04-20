@@ -12,7 +12,7 @@ def bag_of_words(dataset):
             else:
                 words_count[word] += 1
 
-    freq_words = heapq.nlargest(500, words_count,  key=words_count.get)
+    freq_words = heapq.nlargest(400, words_count,  key=words_count.get)
 
     features = []
     for data in dataset:

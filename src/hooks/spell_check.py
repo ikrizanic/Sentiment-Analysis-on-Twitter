@@ -1,11 +1,33 @@
+import csv
 import nltk
 from ekphrasis.classes.spellcorrect import SpellCorrector
 from nltk.corpus import words
+
+
+with open('/home/ikrizanic/pycharm/zavrsni/data/slang.csv', mode='r') as infile:
+    reader = csv.reader(infile, delimiter=';')
+    slang_dict = dict(reader)
 
 sp = SpellCorrector(corpus="english")
 nltk.download("words")
 words = set(words.words())
 punctuations = '''!()-[]{};:\'"\,<>./?@#$%^&*_~'''
+
+
+def replace_slang(raw, tokenized):
+    tokens = []
+    for token in tokenized:
+        if token not in words:
+            for key, value in slang_dict.items():
+                if str(key).lower() == str(token).lower():
+                    token = value.split(" ")
+            if type(token) is list:
+                tokens.extend(token)
+            else:
+                tokens.append(token)
+        else:
+            tokens.append(token)
+    return raw, tokens
 
 
 def spell_check(raw):

@@ -9,3 +9,4 @@ def remove_stopwords(raw, tokenized):
         if token_lower not in stop_words_set:
             tokens.append(token)
     return raw, tokens
+
