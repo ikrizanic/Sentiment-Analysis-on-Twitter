@@ -1,6 +1,7 @@
 import re
 import pandas as pd
 import string
+from tqdm import tqdm
 
 
 def remove_punctuation(raw):
@@ -103,6 +104,25 @@ def replace_unuseful_emoticons(raw):
             raw.replace(k, v)
     return raw
 
+def remove_duplicates(csv_data):
+    clean_data = dict()
+    for i in tqdm((range(len(csv_data)))):
+        if csv_data.text[i] not in clean_data and isinstance(csv_data.text[i], str):
+            clean_data.update({csv_data.text[i]: csv_data.label[i]})
+    return clean_data
 
-
-
+def return_tweets_and_labels(raw_data):
+    data = remove_duplicates(raw_data)
+    tweets = list()
+    labels = list()
+    for text in data.keys():
+        tweets.append(text)
+    for polarity in data.values():
+        if polarity == "positive":
+            labels.append(2)
+        elif polarity == "neutral":
+            labels.append(1)
+        else:
+            labels.append(0)
+    labels.pop(0)
+    return tweets, labels
