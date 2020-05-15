@@ -4,6 +4,7 @@ from src.hooks.various_functions import *
 from src.load_data.pickle_functions import *
 from src.models.lstm import *
 
+
 # change spellcheck path, and path in lstm (model.h5)
 def main():
     local_path = "/home/ivan/Documents/git_repos/Sentiment-Analysis-on-Twitter/data"
@@ -90,12 +91,12 @@ def main():
         "y_test": test_labels
     }
 
-    rls = [128, 256]
-    dense_size = [64, 128, 256]
-    dropout = [0, 0.05, 0.1, 0.2, 0.4]
-    dense_activation = ['relu']
+    rls = [256, 512]
+    dense_size = [256, 512]
+    dropout = [0]
+    dense_activation = ['relu', "softmax"]
     dropout_for_reg = [0, 0.5]
-    output_activation = ['softmax']
+    output_activation = ["relu", 'softmax']
     optimizer = ['adam']
     loss = [tf.keras.losses.SquaredHinge(reduction="auto", name="squared_hinge")]
 
@@ -138,10 +139,22 @@ def test_model(data, params):
     history, model = fit_model(model, data['x_t'], data['y_t'], data["x_v"], data['y_v'])
 
     # TODO: dodati višestruku evaluaciju i računati avg
-    result = evaluate_model(model, data['x_test'], data['y_test'])
+    acc_results = list()
+    loss_results = list()
+
+    for run in range(5):
+        result = evaluate_model(model, data['x_test'], data['y_test'])
+        loss_results.append(result[0])
+        acc_results.append(result[1])
+    acc_mean = np.array(acc_results).mean()
+    acc_dev = np.array(acc_results).std()
+
+    loss_mean = np.array(loss_results).mean()
+    loss_dev = np.array(loss_results).std()
+
     print(params)
-    print("Loss: " + str(result[0]))
-    print("Acc: " + str(result[1]))
+    print("Loss: {:5.2f} +- {:5.2f}".format(loss_mean, loss_dev))
+    print("Acc: {:5.2f} +- {:5.2f}".format(acc_mean, acc_dev))
 
     p_out = ""
     for k, v in params.items():
@@ -152,8 +165,8 @@ def test_model(data, params):
     with open("result_15_5.txt", "a") as myfile:
         myfile.write("-" * 80)
         myfile.write(p_out)
-        myfile.write("Loss: " + str(result[0]) + "\n")
-        myfile.write("Acc: " + str(result[1]) + "\n")
+        myfile.write("Loss: " + str("Loss: {:5.2f} +- {:5.2f}".format(loss_mean, loss_dev) + "\n"))
+        myfile.write("Acc: " + str("Acc: {:5.2f} +- {:5.2f}".format(acc_mean, acc_dev)) + "\n")
         myfile.write("-" * 80)
         myfile.write("\n")
 

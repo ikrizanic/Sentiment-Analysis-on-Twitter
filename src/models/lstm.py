@@ -34,6 +34,9 @@ def compile_model(vocab, embedding_matrix, input_length,
     # Recurrent layer
     model.add(LSTM(recurrent_layer_size, return_sequences=False, dropout=dropout, recurrent_dropout=recurrent_dropout))
 
+    # Second layer
+    model.add(LSTM(recurrent_layer_size, return_sequences=False, dropout=dropout, recurrent_dropout=recurrent_dropout))
+
     # Fully connected layer
     model.add(Dense(dense_size, activation=dense_activation))
 
