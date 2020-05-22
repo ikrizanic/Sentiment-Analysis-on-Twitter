@@ -1,4 +1,7 @@
 import pandas as pd
+import tensorflow as tf
+import tqdm
+import sklearn
 from keras.utils import to_categorical
 from src.hooks.various_functions import *
 from src.load_data.pickle_functions import *
@@ -11,74 +14,106 @@ def main():
     djurdja_path = "/home/ikrizanic/pycharm/zavrsni/data"
     working_path = local_path
     data_paths = {"train_dataset": working_path + "/lstm/train_dataset.pl",
+                  "input_dataset": working_path + "/lstm/input_dataset.pl",
+                  "input_labels": working_path + "/lstm/input_labels.pl",
                   "test_dataset": working_path + "/lstm/test_dataset.pl",
                   "train_labels": working_path + "/lstm/train_labels.pl",
                   "test_labels": working_path + "/lstm/test_labels.pl",
                   "embedding_matrix": working_path + "/lstm/embedding_matrix.pl"}
 
-    # dataset_name = "main" + "_data"
-    # djurdja_paths = {"dataset": str("~/pycharm/zavrsni/data/" + dataset_name + ".csv"),
-    #                  "labels": "/home/ikrizanic/pycharm/zavrsni/data/labels.txt"}
-    # local_paths = {
-    #     "dataset": str("/home/ivan/Documents/git_repos/Sentiment-Analysis-on-Twitter/data/" + dataset_name + ".csv"),
-    #     "labels": "/home/ivan/Documents/git_repos/Sentiment-Analysis-on-Twitter/data/labels.txt"}
-    #
-    # raw_data_merge = pd.read_csv(local_paths["dataset"], sep="\t", names=["label", "text"])
-    #
+    dataset_name = "main" + "_data"
+    djurdja_paths = {"dataset": str("~/pycharm/zavrsni/data/" + dataset_name + ".csv"),
+                     "labels": "/home/ikrizanic/pycharm/zavrsni/data/labels.txt"}
+    local_paths = {
+        "dataset": str("/home/ivan/Documents/git_repos/Sentiment-Analysis-on-Twitter/data/" + dataset_name + ".csv"),
+        "labels": "/home/ivan/Documents/git_repos/Sentiment-Analysis-on-Twitter/data/labels.txt"}
+
+    # train_dataset = pd.read_csv(local_paths["dataset"], sep="\t", names=["label", "text"])
+    # train_dataset = pd.read_csv(
+    # '/home/ivan/Documents/git_repos/Sentiment-Analysis-on-Twitter/data/SemEval2017-task4-dev.subtask-A.english.INPUT.txt',
+    #                             sep="\t", quotechar='"',
+    #                             names=["id", "label", "text"])
+
     # test_dataset = pd.read_csv(
     #     '/home/ivan/Documents/git_repos/Sentiment-Analysis-on-Twitter/data/SemEval2017-task4-test.subtask-A.english.txt',
     #     sep="\t", quotechar='\'', names=["id", "label", "text"])
-    #
-    # train_dataset, train_labels = return_tweets_and_labels(raw_data_merge)
+
+    # test_dataset = pd.read_csv(
+    #         '/home/ivan/Documents/git_repos/Sentiment-Analysis-on-Twitter/data/test_eval.txt',
+    #         sep="\t", quotechar='\'', names=["id", "label", "text"])
+
+    # train_dataset, train_labels = return_tweets_and_labels(train_dataset)
     # test_dataset, test_labels = return_tweets_and_labels(test_dataset)
-    #
+
     # train_dataset = process_dataset(train_dataset)
     # test_dataset = process_dataset(test_dataset)
 
-    # dump_dataset(train_dataset, )
-    # dump_dataset(test_dataset, )
-    # dump_labels(train_labels, )
-    # dump_labels(test_labels, )
+    # dump_dataset(train_dataset, data_paths["train_dataset"])
+    # dump_dataset(test_dataset, data_paths["test_dataset"])
+    # dump_labels(train_labels, data_paths["train_labels"])
+    # dump_labels(test_labels, data_paths["test_labels"])
 
-    print("Reading pickle data...")
+    # print("Reading pickle data...")
     train_dataset = load_dataset(data_paths["train_dataset"])
     test_dataset = load_dataset(data_paths["test_dataset"])
     train_labels = load_labels(data_paths["train_labels"])
     test_labels = load_labels(data_paths["test_labels"])
+    # print("Done")
 
     print("Train vocab and data encoding...")
     train_vocab, enc_train_data = create_vocab_encode_data([d["anot_tokens"] for d in train_dataset])
-    enc_test_data = encode_data(test_dataset, train_vocab)
+    enc_test_data = encode_data([d["anot_tokens"] for d in test_dataset], train_vocab)
+    print("Done")
 
     print("Padding features...")
     train_features = pad_encoded_data(enc_train_data, max(x for x in [len(d) for d in enc_train_data]))
     test_features = pad_encoded_data(enc_test_data, max(x for x in [len(d) for d in enc_train_data]))
+    print("Done")
 
+    # print("Embedding matrix...")
     # embedding_matrix = make_embedding_matrix(train_vocab)
+    # print("Done")
 
     # with(open(data_paths["embedding_matrix"], "wb")) as f:
     #     pickle.dump(embedding_matrix, f)
-
     print("Loading matrix from pickle file...")
     with(open(data_paths["embedding_matrix"], "rb")) as f:
         embedding_matrix = pickle.load(f)
+    print("Done")
 
-    X_train, X_val, y_train, y_val = train_test_split(train_features, train_labels, test_size=0.4, random_state=13)
+    X_train, X_val, y_train, y_val = train_test_split(train_features, train_labels, test_size=0.1, random_state=25,
+                                                      shuffle=True)
 
     y_train = to_categorical(y_train)
     y_val = to_categorical(y_val)
-
     test_labels = to_categorical(test_labels)
 
     max_len = max(x for x in [len(d) for d in enc_train_data])
-    model = compile_model(train_vocab, embedding_matrix, max_len)
-    history, model = fit_model(model, X_train, y_train, X_val, y_val)
-    for i in range(5):
-        result = evaluate_model(model, test_features, test_labels)
-        print("-" * 80)
-        print("Loss: " + str(result[0]))
-        print("Acc: " + str(result[1]))
 
+    # single run
+    cce = tf.keras.losses.CategoricalCrossentropy()
+    sq_hinge = tf.keras.losses.SquaredHinge(reduction="auto", name="squared_hinge")
+    model = compile_model(train_vocab, embedding_matrix, max_len,
+                          recurrent_layer_size=20,
+                          dense_size=20,
+                          dropout=0,
+                          recurrent_dropout=0,
+                          dense_activation='relu',
+                          dropout_for_regularization=0,
+                          output_activation='softmax',
+                          optimizer='Adam',
+                          loss=cce
+                          )
+
+    # history, model = fit_model(model, X_train, y_train, X_val, y_val, batch_size=2048, epochs=5)
+    #
+    # result = evaluate_model(model, test_features, test_labels)
+    # print(result)
+    # x_1, x_2, y_1, y_2 = sklearn.model_selection.train_test_split(test_features, test_labels, random_state=13)
+    # recall = calc_recall(model, x_1, y_1)
+    # recall = calc_recall(model, x_2, y_2)
+
+    # multiple runs
     data = {
         "train_vocab": train_vocab,
         "embedding_matrix": embedding_matrix,
@@ -91,14 +126,15 @@ def main():
         "y_test": test_labels
     }
 
-    rls = [256, 512]
-    dense_size = [256, 512]
+    rls = [1]
+    dense_size = [1]
+    epochs = [1]
     dropout = [0]
-    dense_activation = ['relu', "softmax"]
-    dropout_for_reg = [0, 0.5]
-    output_activation = ["relu", 'softmax']
+    dense_activation = ['relu']
+    dropout_for_reg = [0]
+    output_activation = ['softmax']
     optimizer = ['adam']
-    loss = [tf.keras.losses.SquaredHinge(reduction="auto", name="squared_hinge")]
+    loss = [tf.keras.losses.CategoricalCrossentropy()]
 
     params_list = list()
     for r in rls:
@@ -109,22 +145,24 @@ def main():
                         for oa in output_activation:
                             for opt in optimizer:
                                 for ls in loss:
-                                    params_list.append({
-                                        "recurrent_layer_size": r,
-                                        "dense_size": ds,
-                                        "dropout": dr,
-                                        "dense_activation": da,
-                                        "dropout_for_reg": drop_reg,
-                                        "output_activation": oa,
-                                        "optimizer": opt,
-                                        "loss": ls
-                                    })
+                                    for ep in epochs:
+                                        params_list.append({
+                                            "recurrent_layer_size": r,
+                                            "dense_size": ds,
+                                            "dropout": dr,
+                                            "dense_activation": da,
+                                            "dropout_for_reg": drop_reg,
+                                            "output_activation": oa,
+                                            "optimizer": opt,
+                                            "loss": ls,
+                                            "epochs": ep
+                                        })
 
-    # for params in params_list:
-    #     test_model(data, params)
+    for params in params_list:
+        test_model(data, params, working_path + "/22_5_128_1_2dense.txt")
 
 
-def test_model(data, params):
+def test_model(data, params, working_path):
     model = compile_model(data["train_vocab"], data["embedding_matrix"], data["max_len"],
                           recurrent_layer_size=params["recurrent_layer_size"],
                           dense_size=params["dense_size"],
@@ -136,25 +174,12 @@ def test_model(data, params):
                           optimizer=params["optimizer"],
                           loss=params["loss"]
                           )
-    history, model = fit_model(model, data['x_t'], data['y_t'], data["x_v"], data['y_v'])
+    history, model = fit_model(model, data['x_t'], data['y_t'], data["x_v"], data['y_v'], epochs=params['epochs'])
 
-    # TODO: dodati višestruku evaluaciju i računati avg
-    acc_results = list()
-    loss_results = list()
-
-    for run in range(5):
-        result = evaluate_model(model, data['x_test'], data['y_test'])
-        loss_results.append(result[0])
-        acc_results.append(result[1])
-    acc_mean = np.array(acc_results).mean()
-    acc_dev = np.array(acc_results).std()
-
-    loss_mean = np.array(loss_results).mean()
-    loss_dev = np.array(loss_results).std()
-
-    print(params)
-    print("Loss: {:5.2f} +- {:5.2f}".format(loss_mean, loss_dev))
-    print("Acc: {:5.2f} +- {:5.2f}".format(acc_mean, acc_dev))
+    result = evaluate_model(model, data['x_test'], data['y_test'])
+    print(result)
+    recall = calc_recall(model, data['x_test'], data['y_test'], path=working_path)
+    print(recall)
 
     p_out = ""
     for k, v in params.items():
@@ -162,11 +187,11 @@ def test_model(data, params):
             continue
         p_out += "\n{:20s}{:20s}".format(str(k), str(v))
 
-    with open("result_15_5.txt", "a") as myfile:
+    # add path
+    with open(working_path, "a") as myfile:
         myfile.write("-" * 80)
         myfile.write(p_out)
-        myfile.write("Loss: " + str("Loss: {:5.2f} +- {:5.2f}".format(loss_mean, loss_dev) + "\n"))
-        myfile.write("Acc: " + str("Acc: {:5.2f} +- {:5.2f}".format(acc_mean, acc_dev)) + "\n")
+        myfile.write("Recall:" + str(recall) + "\n")
         myfile.write("-" * 80)
         myfile.write("\n")
 

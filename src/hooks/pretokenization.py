@@ -124,5 +124,4 @@ def return_tweets_and_labels(raw_data):
             labels.append(1)
         else:
             labels.append(0)
-    labels.pop(0)
     return tweets, labels
