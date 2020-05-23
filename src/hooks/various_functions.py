@@ -65,24 +65,24 @@ def process_dataset(data):
     dataset = list()
     for i in tqdm(range(len(data))):
         new_tweet = repair_chars(data[i])
-        # anot = copy.deepcopy(new_tweet)
+        anot = copy.deepcopy(new_tweet)
         anot = new_tweet
-        # new_tweet = remove_usernames(new_tweet)
-        # new_tweet = remove_links(new_tweet)
-        # new_tweet = remove_punctuation(new_tweet)
-        #
-        # tweet_tokens = tokenize(new_tweet, tokenizer="spacy")
-        # tweet_tokens = remove_stopwords(raw="", tokenized=tweet_tokens)
+        new_tweet = remove_usernames(new_tweet)
+        new_tweet = remove_links(new_tweet)
+        new_tweet = remove_punctuation(new_tweet)
+
+        tweet_tokens = tokenize(new_tweet, tokenizer="spacy")
+        tweet_tokens = remove_stopwords(raw="", tokenized=tweet_tokens)
 
         anot = annotation_normalization(anot)
         anot_tokens = tokenize(anot, tokenizer="split")
         anot_tokens = spell_check_tokens(anot_tokens)
         anot_tokens = replace_slang_tokens(anot_tokens)
         anot_tokens = remove_stopwords_tokens(anot_tokens)
-        # anot_tokens = lemmatize(anot_tokens)
+        anot_tokens = lemmatize(anot_tokens)
 
-        # dataset.append({"tweet": new_tweet, "tweet_tokens": tweet_tokens, "anot": anot, "anot_tokens": anot_tokens})
-        dataset.append({"anot_tokens": anot_tokens})
+        dataset.append({"tweet": new_tweet, "tweet_tokens": tweet_tokens, "anot": anot, "anot_tokens": anot_tokens})
+        # dataset.append({"anot_tokens": anot_tokens})
     return dataset
 
 
@@ -93,7 +93,7 @@ def create_vocab_encode_data(tokens):
 
 
 def pad_encoded_data(encoded, seq_length):
-    features = np.zeros((len(encoded), seq_length), dtype=int)
+    features = np.zeros((len(encoded), seq_length), dtype=float)
     for i, review in enumerate(encoded):
         if len(review) > seq_length:
             review = review[:seq_length]

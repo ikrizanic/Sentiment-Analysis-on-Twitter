@@ -2,7 +2,7 @@ import re
 
 def has_all_caps(dataset, features):
     for i in range(len(dataset)):
-        tweet = dataset[i].anot[0]
+        tweet = dataset[i]
         reg = re.findall(r'<allcaps>(.*)</allcaps>', tweet)
         if len(reg) != 0:
             # 1 if there is all caps, 0 if there is none
@@ -18,7 +18,7 @@ def has_all_caps(dataset, features):
 
 def has_hash_tag(dataset, features):
     for i in range(len(dataset)):
-        tweet = dataset[i].anot[0]
+        tweet = dataset[i]
         reg = re.findall(r'<hashtag>([^<]*)</hashtag>', tweet)
         if len(reg) != 0:
             # 1 if there is hash tag, 0 if there is none
@@ -31,7 +31,7 @@ def has_hash_tag(dataset, features):
 
 def has_normalizations(dataset, features):
     for i in range(len(dataset)):
-        tweet = dataset[i].anot[0]
+        tweet = dataset[i]
         features[i].append(len(re.findall(r'<url>', tweet)))
         features[i].append(len(re.findall(r'<email>', tweet)))
         features[i].append(len(re.findall(r'<percent>', tweet)))
@@ -44,7 +44,7 @@ def has_normalizations(dataset, features):
 
 def has_annotations(dataset, features):
     for i in range(len(dataset)):
-        tweet = dataset[i].anot[0]
+        tweet = dataset[i]
         features[i].append(len(re.findall(r'<elongated>', tweet)))
         features[i].append(len(re.findall(r'<emphasis>', tweet)))
         features[i].append(len(re.findall(r'<repeated>', tweet)))
@@ -62,5 +62,5 @@ def extract_boolean_features(dataset):
 
 def count_words(dataset, features):
     for i in range(len(dataset)):
-        features[i].append(len(dataset[i].tweet[1]))
+        features[i].append(len(dataset[i]))
 

@@ -2,7 +2,7 @@ import csv
 import statistics
 from nltk.stem import WordNetLemmatizer
 
-anew = "/home/ikrizanic/pycharm/zavrsni/data/anew.csv"
+anew = "/home/ivan/Documents/git_repos/Sentiment-Analysis-on-Twitter/data/anew.csv"
 lm = WordNetLemmatizer()
 negations = ["no", "not", "n't"]
 

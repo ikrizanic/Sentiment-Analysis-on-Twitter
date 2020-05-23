@@ -24,3 +24,4 @@ def bag_of_words(dataset):
                 vector.append(0)
         features.append(vector)
     return np.asarray(features)
+

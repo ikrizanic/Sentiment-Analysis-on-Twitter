@@ -124,3 +124,56 @@ def calc_recall(model, test_features, test_labels, path=""):
     print("Res: {:4f}, {:4f}, {:4f}".format(rn, ru, rp))
     print("Final: {:4f}".format((rp + rn + ru) * 100 / 3))
     return (rp + rn + ru) * 100 / 3
+
+
+def calc_recall2(predictions, test_labels, path=""):
+    import numpy as np
+    predictions = np.eye(3, dtype=float)[np.argmax(predictions, axis=1)]
+    tp, tn, tu, np, nn, nu = 0, 0, 0, 0, 0, 0
+    fp, fn, fu = 0, 0, 0
+    for i in range(len(predictions)):
+        p = list(predictions[i])
+        l = list(test_labels[i])
+
+        if l == [1.0, 0.0, 0.0]:
+            nn += 1
+            if l == p:
+                tn += 1
+            else:
+                if p == [0.0, 1.0, 0.0]:
+                    fu += 1
+                else:
+                    fp += 1
+        if l == [0.0, 1.0, 0.0]:
+            nu += 1
+            if l == p:
+                tu += 1
+            else:
+                if p == [1.0, 0.0, 0.0]:
+                    fn += 1
+                else:
+                    fp += 1
+        if l == [0.0, 0.0, 1.0]:
+            np += 1
+            if l == p:
+                tp += 1
+            else:
+                if p == [0.0, 1.0, 0.0]:
+                    fu += 1
+                else:
+                    fn += 1
+    rp = tp / np
+    ru = tu / nu
+    rn = tn / nn
+    if path != "":
+        with open(path, "a") as file:
+            file.writelines("True: {}, {}, {}\n".format(tn, tu, tp))
+            file.writelines("False: {}, {}, {}\n".format(fn, fu, fp))
+            file.writelines("Sum: {}, {}, {}\n".format(nn, nu, np))
+            file.writelines("Res: {}, {}, {}\n".format(rn, ru, rp))
+    print("True: {}, {}, {}".format(tn, tu, tp))
+    print("False: {}, {}, {}".format(fn, fu, fp))
+    print("Neto: {}, {}, {}".format(nn, nu, np))
+    print("Res: {:4f}, {:4f}, {:4f}".format(rn, ru, rp))
+    print("Final: {:4f}".format((rp + rn + ru) * 100 / 3))
+    return (rp + rn + ru) * 100 / 3
