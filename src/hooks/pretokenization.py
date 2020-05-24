@@ -52,6 +52,14 @@ def read_raw_tweets(data_path, sep="\t"):
 
 
 EMOTICONS, useful_emoticons = dict(), dict()
+
+def init_emoji(emoticons_path):
+    emoticons_file = pd.read_csv(emoticons_path, sep="  ->  ", names=["emoji", "meaning"])
+    for i in range(len(emoticons_file)):
+        e = emoticons_file.emoji[i]
+        m = emoticons_file.meaning[i]
+        EMOTICONS.update({e: m})
+
 def find_useful_emoticons(emoticons_path, data_path):
     tweets, polarities = read_raw_tweets(data_path)
     emoticons_file = pd.read_csv(emoticons_path, sep="  ->  ", names=["emoji", "meaning"])
@@ -98,9 +106,9 @@ def find_useful_emoticons(emoticons_path, data_path):
             useful_emoticons.update({k: v})
 
 
-def replace_unuseful_emoticons(raw):
+def replace_useful_emoticons(raw):
     for k, v in EMOTICONS.items():
-        if k not in useful_emoticons.keys() and k in raw:
+        if k in raw:
             raw.replace(k, v)
     return raw
 

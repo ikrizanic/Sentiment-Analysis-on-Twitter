@@ -8,7 +8,9 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 import copy
 
-nlp = spacy.load('en_core_web_lg', disable=["parser", "ner"])
+nlp_small = spacy.load('en_core_web_lg', disable=["parser", "ner"])
+nlp = spacy.load('en_core_web_lg')
+
 
 def tokenize(raw, tokenizer="split"):
     if tokenizer == "spacy":
@@ -18,6 +20,7 @@ def tokenize(raw, tokenizer="split"):
 
 
 lemmatizer = WordNetLemmatizer()
+
 
 def lemmatize(tokens):
     lem = list()
@@ -35,6 +38,7 @@ def build_vocab(data):
                 vocab.update({word: index})
                 index += 1
     return vocab
+
 
 def encode_sentence(sentence, vocab):
     encoded = list()
@@ -61,6 +65,10 @@ def split_train_validate_test(data, labels, train_valtest_ratio, validate_test_r
 
     return X_train, X_validate, X_test, y_train, y_validate, y_test
 
+
+init_emoji("/home/ivan/Documents/git_repos/Sentiment-Analysis-on-Twitter/data/emoticons.txt")
+
+
 def process_dataset(data):
     dataset = list()
     for i in tqdm(range(len(data))):
@@ -69,6 +77,7 @@ def process_dataset(data):
         anot = new_tweet
         new_tweet = remove_usernames(new_tweet)
         new_tweet = remove_links(new_tweet)
+        new_tweet = replace_useful_emoticons(new_tweet)
         new_tweet = remove_punctuation(new_tweet)
 
         tweet_tokens = tokenize(new_tweet, tokenizer="spacy")
@@ -116,3 +125,29 @@ def make_embedding_matrix(vocab, embedding_dim=300):
 
     print("Converted %d words (%d misses)" % (hits, misses))
     return embedding_matrix
+
+
+def bag_of_words_embedding(data):
+    print("BOW embedding...")
+    # corpus = np.array([d for d in data])
+    return np.array([nlp(str(doc)).vector for doc in data])
+
+
+def average_word_vectors(tokens, vocab, embedding_matrix, num_features=300):
+    feature_vector = np.zeros((num_features,), dtype="float64")
+    n_words = 0.
+    for word in tokens:
+        if word in vocab:
+            n_words += 1.
+            feature_vector = np.add(feature_vector, embedding_matrix[vocab[word]])
+
+    if n_words:
+        feature_vector = np.divide(feature_vector, n_words)
+
+    return feature_vector
+
+
+def bow_averaged_embeddings(data, vocab, embedding_matrix):
+    features = [average_word_vectors(tokenized_sentence, vocab, embedding_matrix)
+                for tokenized_sentence in data]
+    return np.array(features)

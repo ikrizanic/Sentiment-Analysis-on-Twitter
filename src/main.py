@@ -126,9 +126,9 @@ def main():
         "y_test": test_labels
     }
 
-    rls = [1]
-    dense_size = [1]
-    epochs = [1]
+    rls = [512]
+    dense_size = [512]
+    epochs = [100]
     dropout = [0]
     dense_activation = ['relu']
     dropout_for_reg = [0]
@@ -159,7 +159,7 @@ def main():
                                         })
 
     for params in params_list:
-        test_model(data, params, working_path + "/22_5_128_1_2dense.txt")
+        test_model(data, params, working_path + "/results/24_5_512.txt")
 
 
 def test_model(data, params, working_path):

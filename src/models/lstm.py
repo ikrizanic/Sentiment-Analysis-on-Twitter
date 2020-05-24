@@ -2,6 +2,7 @@ from keras.models import Sequential
 from keras.layers import LSTM, Dense, Dropout, Masking, Embedding
 import tensorflow as tf
 from keras.callbacks import EarlyStopping, ModelCheckpoint
+from keras.utils import to_categorical
 
 
 def compile_model(vocab, embedding_matrix, input_length,
@@ -128,12 +129,12 @@ def calc_recall(model, test_features, test_labels, path=""):
 
 def calc_recall2(predictions, test_labels, path=""):
     import numpy as np
-    predictions = np.eye(3, dtype=float)[np.argmax(predictions, axis=1)]
+    test_labels_cat = to_categorical(test_labels)
     tp, tn, tu, np, nn, nu = 0, 0, 0, 0, 0, 0
     fp, fn, fu = 0, 0, 0
     for i in range(len(predictions)):
         p = list(predictions[i])
-        l = list(test_labels[i])
+        l = list(test_labels_cat[i])
 
         if l == [1.0, 0.0, 0.0]:
             nn += 1
