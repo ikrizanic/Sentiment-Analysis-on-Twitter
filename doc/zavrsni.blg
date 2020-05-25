@@ -3,44 +3,46 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: zavrsni.aux
 The style file: fer.bst
 Database file #1: literatura.bib
-You've used 1 entry,
+Warning--empty journal in semeval2017task4
+You've used 4 entries,
             2773 wiz_defined-function locations,
-            601 strings with 5060 characters,
-and the built_in function-call counts, 339 in all, are:
-= -- 28
-> -- 10
-< -- 1
-+ -- 4
-- -- 3
-* -- 17
-:= -- 57
-add.period$ -- 4
-call.type$ -- 1
-change.case$ -- 4
-chr.to.int$ -- 1
-cite$ -- 2
-duplicate$ -- 15
-empty$ -- 33
-format.name$ -- 4
-if$ -- 67
+            621 strings with 5817 characters,
+and the built_in function-call counts, 1823 in all, are:
+= -- 179
+> -- 60
+< -- 5
++ -- 22
+- -- 18
+* -- 117
+:= -- 267
+add.period$ -- 17
+call.type$ -- 4
+change.case$ -- 18
+chr.to.int$ -- 4
+cite$ -- 9
+duplicate$ -- 99
+empty$ -- 166
+format.name$ -- 22
+if$ -- 402
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 0
-newline$ -- 14
-num.names$ -- 4
-pop$ -- 12
+missing$ -- 3
+newline$ -- 31
+num.names$ -- 16
+pop$ -- 46
 preamble$ -- 1
-purify$ -- 3
+purify$ -- 14
 quote$ -- 0
-skip$ -- 14
+skip$ -- 75
 stack$ -- 0
-substring$ -- 2
-swap$ -- 1
-text.length$ -- 0
+substring$ -- 72
+swap$ -- 23
+text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 11
-warning$ -- 0
-while$ -- 3
+type$ -- 44
+warning$ -- 1
+while$ -- 18
 width$ -- 0
-write$ -- 21
+write$ -- 66
+(There was 1 warning)
