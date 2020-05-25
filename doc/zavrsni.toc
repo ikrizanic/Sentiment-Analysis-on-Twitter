@@ -1,7 +1,8 @@
 \babel@toc {croatian}{}
-\contentsline {chapter}{\numberline {1}Uvod}{1}% 
-\contentsline {chapter}{\numberline {2}Povezani radovi}{2}% 
-\contentsline {section}{\numberline {2.1}Rad tima \textit {BB\_twtr} - najuspješniji model današnjice}{2}% 
-\contentsline {section}{\numberline {2.2}Rad tima \textit {DataStories}}{3}% 
-\contentsline {chapter}{\numberline {3}Zaključak}{4}% 
-\contentsline {chapter}{Literatura}{5}% 
+\contentsline {chapter}{\numberline {1}Uvod}{1}%
+\contentsline {chapter}{\numberline {2}Povezani radovi}{2}%
+\contentsline {section}{\numberline {2.1}Rad tima \textit {BB\_twtr} - najuspješniji model današnjice}{2}%
+\contentsline {section}{\numberline {2.2}Rad tima \textit {DataStories}}{3}%
+\contentsline {section}{\numberline {2.3}Rad tima \textit {TakeLab} - pristup klasičnim strojnim učenjem}{4}%
+\contentsline {chapter}{\numberline {3}Zaključak}{5}%
+\contentsline {chapter}{Literatura}{6}%

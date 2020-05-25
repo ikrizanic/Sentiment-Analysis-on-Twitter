@@ -1,4 +1,4 @@
-\begin{thebibliography}{4}
+\begin{thebibliography}{5}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -23,6 +23,18 @@ Mathieu Cliche.
   2017. Association for Computational Linguistics.
 \newblock \doi{10.18653/v1/S17-2094}.
 \newblock URL \url{https://www.aclweb.org/anthology/S17-2094}.
+
+\bibitem[Lozi{\'c} et~al.(2017)Lozi{\'c}, {\v{S}}ari{\'c}, Toki{\'c},
+  Medi{\'c}, i {\v{S}}najder]{2017-takelab}
+David Lozi{\'c}, Doria {\v{S}}ari{\'c}, Ivan Toki{\'c}, Zoran Medi{\'c}, i Jan
+  {\v{S}}najder.
+\newblock {T}ake{L}ab at {S}em{E}val-2017 task 4: Recent deaths and the power
+  of nostalgia in sentiment analysis in twitter.
+\newblock U \emph{Proceedings of the 11th International Workshop on Semantic
+  Evaluation ({S}em{E}val-2017)}, stranice 784--789, Vancouver, Canada, Kolovoz
+  2017. Association for Computational Linguistics.
+\newblock \doi{10.18653/v1/S17-2132}.
+\newblock URL \url{https://www.aclweb.org/anthology/S17-2132}.
 
 \bibitem[{Salman Aslam}(2020)]{twitterStats}
 {Salman Aslam}.
