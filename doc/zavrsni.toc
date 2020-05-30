@@ -8,5 +8,12 @@
 \contentsline {section}{\numberline {3.1}O zadatku 4 natjecanja \emph {Semeval 2017} i analizi sentimenta u mikroblogovima}{5}% 
 \contentsline {section}{\numberline {3.2}Odabir metoda i pristupa}{6}% 
 \contentsline {subsection}{\numberline {3.2.1}Klasično strojno učenje - \gls {SVM} model}{6}% 
-\contentsline {chapter}{\numberline {4}Zaključak}{7}% 
-\contentsline {chapter}{Literatura}{8}% 
+\contentsline {subsection}{\numberline {3.2.2}Duboko učenje - \gls {LSTM} model}{6}% 
+\contentsline {section}{\numberline {3.3}Značajke}{6}% 
+\contentsline {subsection}{\numberline {3.3.1}Značajke u klasičnom pristupu}{6}% 
+\contentsline {subsubsection}{Brojanje riječi i vektori riječi}{7}% 
+\contentsline {subsubsection}{Polaritet i sentiment riječi}{8}% 
+\contentsline {subsubsection}{Brojanje prisutnosti elemenata}{8}% 
+\contentsline {subsection}{\numberline {3.3.2}Značajke u dubokom učenju}{9}% 
+\contentsline {chapter}{\numberline {4}Zaključak}{10}% 
+\contentsline {chapter}{Literatura}{11}% 

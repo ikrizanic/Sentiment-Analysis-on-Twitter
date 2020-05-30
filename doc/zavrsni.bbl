@@ -1,4 +1,4 @@
-\begin{thebibliography}{5}
+\begin{thebibliography}{9}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -14,6 +14,13 @@ Christos Baziotis, Nikos Pelekis, i Christos Doulkeridis.
   Evaluation (SemEval-2017)}, stranice 747--754, Vancouver, Canada, August
   2017. Association for Computational Linguistics.
 
+\bibitem[Bradley i Lang(1999)]{anew}
+Margaret~M Bradley i Peter~J Lang.
+\newblock Affective norms for english words (anew): Instruction manual and
+  affective ratings.
+\newblock Technical report, Technical report C-1, the center for research in
+  psychophysiology~…, 1999.
+
 \bibitem[Cliche(2017)]{cliche-2017-bb}
 Mathieu Cliche.
 \newblock {BB}{\_}twtr at {S}em{E}val-2017 task 4: Twitter sentiment analysis
@@ -23,6 +30,12 @@ Mathieu Cliche.
   2017. Association for Computational Linguistics.
 \newblock \doi{10.18653/v1/S17-2094}.
 \newblock URL \url{https://www.aclweb.org/anthology/S17-2094}.
+
+\bibitem[{Doris Zhou}()]{anew_code}
+{Doris Zhou}.
+\newblock Implementations of various sentiment analysis methods in python.
+\newblock URL \url{https://github.com/dwzhou/SentimentAnalysis}.
+\newblock [Online; accessed 13-April-2020].
 
 \bibitem[Lozi{\'c} et~al.(2017)Lozi{\'c}, {\v{S}}ari{\'c}, Toki{\'c},
   Medi{\'c}, i {\v{S}}najder]{2017-takelab}
@@ -36,6 +49,12 @@ David Lozi{\'c}, Doria {\v{S}}ari{\'c}, Ivan Toki{\'c}, Zoran Medi{\'c}, i Jan
 \newblock \doi{10.18653/v1/S17-2132}.
 \newblock URL \url{https://www.aclweb.org/anthology/S17-2132}.
 
+\bibitem[Mikolov et~al.(2015)Mikolov, Chen, Corrado, i Dean]{w2v}
+Tomas Mikolov, Kai Chen, Gregory~S Corrado, i Jeffrey~A Dean.
+\newblock Computing numeric representations of words in a high-dimensional
+  space, Svibanj~19 2015.
+\newblock US Patent 9,037,464.
+
 \bibitem[{Salman Aslam}(2020)]{twitterStats}
 {Salman Aslam}.
 \newblock Twitter by the numbers: Stats, demographics and fun facts, 2020.
@@ -46,5 +65,11 @@ David Lozi{\'c}, Doria {\v{S}}ari{\'c}, Ivan Toki{\'c}, Zoran Medi{\'c}, i Jan
 {Sara Rosenthal, Noura Farra, Preslav Nakov}.
 \newblock Semeval-2017 task 4: Sentiment analysis in twitter.
 \newblock 2017.
+
+\bibitem[Warriner et~al.(2013)Warriner, Kuperman, i Brysbaert]{anew2}
+Amy~Beth Warriner, Victor Kuperman, i Marc Brysbaert.
+\newblock Norms of valence, arousal, and dominance for 13,915 english lemmas.
+\newblock \emph{Behavior research methods}, 45\penalty0 (4):\penalty0
+  1191--1207, 2013.
 
 \end{thebibliography}

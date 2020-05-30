@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=latex 2020.5.8)  30 MAY 2020 14:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=latex 2020.5.8)  30 MAY 2020 22:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -574,28 +574,28 @@ LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 95.
  [5
 
-] [6]
+] [6] [7] [8] [9]
 Poglavlje 4.
-(./zavrsni.bbl [7
+(./zavrsni.bbl [10
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 40--44
+Underfull \hbox (badness 10000) in paragraph at lines 59--63
 \T1/ptm/m/n/12 URL $\T1/pcr/m/n/12 https : / / www . omnicoreagency . com / twi
 tter-[]statistics/$\T1/ptm/m/n/12 .
  []
 
-) (./zavrsni.gls [8
+[11
 
-]) [9
+]) (./zavrsni.gls [12]) [13
 
-] [10] (./zavrsni.aux) ) 
+] [14] (./zavrsni.aux) ) 
 Here is how much of TeX's memory you used:
- 11491 strings out of 492168
- 186023 string characters out of 6131585
- 313845 words of memory out of 5000000
- 15644 multiletter control sequences out of 15000+600000
+ 11504 strings out of 492168
+ 186197 string characters out of 6131585
+ 314027 words of memory out of 5000000
+ 15657 multiletter control sequences out of 15000+600000
  41639 words of font info for 62 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 50i,6n,46p,1972b,284s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 50i,6n,46p,1972b,291s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on zavrsni.dvi (14 pages, 23716 bytes).
+Output written on zavrsni.dvi (18 pages, 34188 bytes).

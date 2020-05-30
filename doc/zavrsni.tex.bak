@@ -7,13 +7,13 @@
 \newglossaryentry{LSTM}
 {
     name=LSTM,
-    description={ćelija s dugoročnom memorijom (engl.~\emph{Long short--term memory})}
+    description={ćelija s dugoročnom memorijom (engl.~\emph{Long short-term memory})}
 }
 
 \newglossaryentry{SVM}
 {
     name=SVM,
-    description={stroj potpornih vektora (engl.~\emph{Support--vector machine})}
+    description={stroj potpornih vektora (engl.~\emph{Support-vector machine})}
 }
 
 \newglossaryentry{CNN}
@@ -55,7 +55,7 @@ Mikroblogovi su danas jedan od najčešće korištenih i najčešće proučavani
 
 Ovaj se rad konkretno bazira na mikroblogovima društvene platforme Twitter. Takozvani Tweetovi, mikroblogovi platforme Twitter, kratke su poruke sačinjene od najviše 140 znakova. Prvi je objavljen 2005. godine, a dvije godine kasnije dnevno se objavljivalo 5000 mikroblogova. Po zadnjim poznatim podatcima taj broj iznosi preko 500 milijuna objava dnevno.\citep{twitterStats} Radi se o iznimno velikom broju podataka koji kao skup mogu nositi korisne informacije, stoga ne čudi da postoje tvrtke koje u ponudi imaju analizu mikroblogova sa Twittera i drugih društvenih platformi (\textit{brandmentions.com, mention.com}). Povratna informacija korisnika vrijedan je resurs kojim se tvrtke mogu obskrbiti, stoga analiza društvenih platformi ima velik ekonomski i društveni značaj. Obradi tako velikog broja podataka pristupa se tehnikama strojnog učenja, a konkretno područje koje se primjenjuje za ovakve zadatke naziva se obrada prirodnog jezika i još preciznije analiza sentimenta. 
 
-U radu sam se pozabavio problemom klasifikacije mikroblogova na one pozitivnog, neutralnog i negativnog sentimenta. Zadatak odgovara podzadatku A, četvrtog zadatka na natjecanju \emph{ Semeval 2017}, koji je u vrijeme održavanja privukao 39 timova iz cijelog svijeta. Ta je godina bila peta u nizu na kojoj se pojavio isti zadatak, što pokazuje interes zajednice za problem analize sentimenta. U sklopu zadatka napravio sam dva modela za klasifikaciju. Jedan pripada standardnom strojnom učenju i temelji se na \gls{SVM} modelu s linearnom jezgrom, a drugi pripada području dubokog učenja i temelji se na \Gls{LSTM} modelu .
+U radu sam se pozabavio problemom klasifikacije mikroblogova na one pozitivnog, neutralnog i negativnog sentimenta. Zadatak odgovara podzadatku A, četvrtog zadatka na natjecanju \emph{ Semeval 2017}, koji je u vrijeme održavanja privukao 39 timova iz cijelog svijeta. Ta je godina bila peta u nizu na kojoj se pojavio isti zadatak, što pokazuje interes zajednice za problem analize sentimenta. U sklopu zadatka napravio sam dva modela za klasifikaciju. Jedan pripada standardnom strojnom učenju i temelji se na \gls{SVM}-modelu s linearnom jezgrom, a drugi pripada području dubokog učenja i temelji se na \Gls{LSTM} inačici modela .
 %TODO struktura rada
 
 \chapter{Povezani radovi}
@@ -82,9 +82,9 @@ Osvrnuli su se na \gls{CNN} i naglasili problematiku gubitka informacije o poret
 
 \section{Rad tima \textit{TakeLab} - pristup klasičnim strojnim učenjem}
 
-Za razliku od velikog broja ekipa na natjecanju, tim \textit{TakeLab} odlučio se za pristup klasičnim metodama strojnog učenja. Koristili su skup ručno izrađenih značajki i trenirali na \gls{SVM} modelu s linearnom jezgrom. Kao značajke koriste \emph{Tf--Idf} i gotove vektore riječi, ali i neke specifične značajke poput leksikona pozitivnih i negativnih riječi te posebnu značajku po kojoj je rad dobio ime: "\textit{Nedavne smrti i moć nostalgije}", odnosno originalni engleski naziv \textit{Recent Deaths and the Power of Nostalgia in Sentiment Analysis in Twitter} \citep{2017-takelab}. Značajka se temelji na činjenici da je sentiment mikroblogova koji spominju nedavno preminute ljude pretežno pozitivan jer se ljudi obično prisjećaju pozitivnih stvari vezanih za pokojnika. Također su iskoristili svojstva nostalgije koja upućuju na pretežno pozitivan sentiment prilikom spominjanja pojmova i pojava iz prijašnjih vremena. Za značajne ljude kreirali su značajke koje opisuju osobe s atributima svojestvenima njohovoj društevnoj ulozi, a za pojmove kojima je često pridjeljenja nekakva ocjena, npr. filmovi, igrice, glazba i slično, napravili su značajke koje donose informacije o uspješnosti i popularnosti pojma. Svojim \gls{SVM} modelom ostvarili su solidan plasman u nekoliko zadataka, a u zadatku kojime se bavi ovaj rad ostvarili su 16. mjesto.
+Za razliku od velikog broja ekipa na natjecanju, tim \textit{TakeLab} odlučio se za pristup klasičnim metodama strojnog učenja. Koristili su skup ručno izrađenih značajki i trenirali na \gls{SVM}-modelu s linearnom jezgrom. Kao značajke koriste \emph{Tf-Idf} i gotove vektore riječi, ali i neke specifične značajke poput leksikona pozitivnih i negativnih riječi te posebnu značajku po kojoj je rad dobio ime: "\textit{Nedavne smrti i moć nostalgije}", odnosno originalni engleski naziv \textit{Recent Deaths and the Power of Nostalgia in Sentiment Analysis in Twitter} \citep{2017-takelab}. Značajka se temelji na činjenici da je sentiment mikroblogova koji spominju nedavno preminute ljude pretežno pozitivan jer se ljudi obično prisjećaju pozitivnih stvari vezanih za pokojnika. Također su iskoristili svojstva nostalgije koja upućuju na pretežno pozitivan sentiment prilikom spominjanja pojmova i pojava iz prijašnjih vremena. Za značajne ljude kreirali su značajke koje opisuju osobe s atributima svojestvenima njohovoj društevnoj ulozi, a za pojmove kojima je često pridjeljenja nekakva ocjena, npr. filmovi, igrice, glazba i slično, napravili su značajke koje donose informacije o uspješnosti i popularnosti pojma. Svojim \gls{SVM}-modelom ostvarili su solidan plasman u nekoliko zadataka, a u zadatku kojime se bavi ovaj rad ostvarili su 16. mjesto.
 
-Potaknut njihovim radom, a i mnogim drugima koji koriste ručno izrađene značajke, u svojoj implementaciji iskoristio sam leksikon pozitivnih i negativnih riječi, te sam iskoristio \gls{SVM} model. Naprednije i inovativne značajke koje čine ovaj rad posebnim nisam implementirao.
+Potaknut njihovim radom, a i mnogim drugima koji koriste ručno izrađene značajke, u svojoj implementaciji iskoristio sam leksikon pozitivnih i negativnih riječi, te sam iskoristio \gls{SVM}-model. Naprednije i inovativne značajke koje čine ovaj rad posebnim nisam implementirao.
 
 \chapter{Model}
 
@@ -94,21 +94,62 @@ Verzija zadatka s kojim sam se bavio u ovom radu peta je u nizu na najtecanju \e
 
 Analiza sentimenta u tekstovima kao što su mikroblogovi s društvenih mreža donosi razne poteškoće s kojima se ne moramo nositi kada je riječ o standardnijim oblicima teksta. Problematične karakteristike mikroblogova su niska ograničenost broja znakova koja uzrokuje sažet izraz, ali i povećava uporabu kolovijalnih izraza, skraćenica i raznih suvremenih novotvorenica koje bismo mogli okarakterizirati kao \emph{slang}. Prisutni su i razni elementi koji ne pripadaju prirodnom jeziku kao što su emotikoni, hiperlinkovi i razne oznake kao npr. oznaka korisničkog imena koja ima oblik \emph{"@user"}. Hiperlinkovi u takvim kratkim tekstovima često nose velik teret značenja, odnosno često tek uz informaciju o sadržaju na koji hiperlink pokazuje možemo pravilno ocijeniti sentiment same poruke. Problem je i u pravopisu, korisnici često mijenjaju riječi radi postizanje vizualnog ili nekog drugog efekta, pa tako možemo naići na tvorevine poput: "ŁoŁ", "ca\$h", "\copyright ool", i slične koje bi bilo poželjno prepoznati i pretvoriti u smislene riječi ili kratice. Također je pristuno nizanje istog slova u riječima poput "\emph{cool}" koje možemo pronaći u obliku kao što je "\emph{cooool}" ili negaciji \emph{"no"} kojoj se često nadodaje zadnje slovo \emph{"o"}. Takvim je riječima također poželjno ukloniti suvišne znakove kako bi se pronašče u rječniku, ali treba imati na umu da takvo ponavljanje znakova nosi značenje u sebi, a koje bismo klasičnim ispravljanjem pravopisa izgubili. Korisno bi bilo prepoznati i skrivene riječi kao što su \emph{"F**k"}. \emph{"S**t"}, \emph{"N***a"} jer su to često riječi koje mogu znatno utjecati na sentiment objave, no to nije tako jednostavan zadatak zbog raznih metoda kojima se takve, često proste riječi, pokušavaju ukomponirati u tekstove.
 
-Kada se odmaknemo od početne obrade teksta nailazimo na nove poteškoće kao što su korištenje sarkazma i učestalost ciničnog tona koji u potpunisti mijenjaju polaritet sentimenta, a koje je vrlo teško prepoznati iz perspektive modela. Ograničenost duljine poruke posljedično donosi manjkavost izraza koji se često bolje razumiju ukoliko se posjeduje znanje o svijetu i vremenu u kojem su napisani, a ne samo o jeziku i značenju istog.
+Kada se odmaknemo od početne obrade teksta nailazimo na nove poteškoće kao što su korištenje sarkazma i učestalost ciničnog tona koji u potpunisti mijenjaju polaritet sentimenta, a koje je vrlo teško prepoznati iz perspektive modela. Ograničenost duljine poruke posljedično donosi manjkavost izraza koji se često bolje razumiju ukoliko se posjeduje znanje o svijetu i vremenu u kojem su napisani, a ne samo o jeziku i značenju istog, što je još jedno svojstvo koje je vrlo teško ostvarivo modelima strojnog učenja.
 
 \section{Odabir metoda i pristupa}
 
-U rješavanju problema koristio sam dva različita pristupa kako bih se osvijestio o prednostima i manama jednog i drugog. Prvi pristup pripada klasičnim metodama strojnog učenja i temelji se na vlastaručnoj izradi značajki i upotrebi \gls{SVM} modela. Drugi pristup pripada grani strojnog učenja koja se naziva duboko učenje i  temelji se na značajkama nastalima od vektora riječi  i \gls{LSTM} modelu neuronske mreže.
+U rješavanju problema koristio sam dva različita pristupa kako bih se osvijestio o prednostima i manama jednog i drugog. Prvi pristup pripada klasičnim metodama strojnog učenja i temelji se na vlastaručnoj izradi značajki i upotrebi \gls{SVM}-modela. Drugi pristup pripada grani strojnog učenja koja se naziva duboko učenje i  temelji se na značajkama nastalima od vektora riječi  i \gls{LSTM} inačici modela povratne neuronske mreže.
 
 
 
 \subsection{Klasično strojno učenje - \gls{SVM} model}
 
+\subsection{Duboko učenje - \gls{LSTM} model}
+
+\section{Značajke}
+
+S obzirom na to da paralelno koristim dva pristupa izrade i treninga modela, izrada i korištenje značajki također je podijeljena u dva smjera. Izrada značajki za klasično strojno učenje znatno je opsežniji i kreativniji proces nego izrada istih za pristup dubokim učenjem. Moglo bi se reći da je srž klasičnog pristupa upravo u izradi značajki jer se modeli sami po sebi ne mogu značajno konfigurirati, pa rezultat najviše ovisi o onome što mu na ulazu pružimo. Kod dubokog učenja postoje jednostavni standardni pristupi koji su ponekad gotovo mandatorni. 
 
 
+\subsection{Značajke u klasičnom pristupu}
 
+Značajke u ovom pristupu čine glavnu okosnicu uspjeha modela, pa je stoga izradi posvećen znatan udio vremena. Značajke se mogu grupirati u tri kategorije: \begin{itemize}
+\item brojanje riječi i vektori riječi
+\item polaritet i sentiment riječi
+\item brojanje prisutnosti elemenata
+\end{itemize}
+
+\subsubsection{Brojanje riječi i vektori riječi}
+
+U ovoj se kategoriji nalaze dvije vrste značajki koje se međusobno isključuju, odnosno ne koriste se istovremeno. Prva značajka je uobičajena kao početni uzorak značajki koji se koristi za treniranje osnovnog modela (engl.~\emph{baseline model}) kao referenca za daljnje eksperimente. Radi se 
+se o metodi vreće riječi (engl. \emph{Bag-of-Words}), odnosno preciznije o primjeni mjere učestalosti riječi \emph{TF-IDF} (engl. \emph{term  frequency-inverse  document  frequency}). Mjera se definira na sljedeći način: potrebno je definirati dvije zasebne statističke mjere -- mjeru učestalosti izraza (\emph{tf}) i inverznu učestalost u dokumentima (\emph{idf}). Prvu mjeru koja označava učestalost pojave riječi računamo na sljedeći način: \[ \mathrm{tf}(t,d) = 0.5 + 0.5 \cdot  \frac{f_{t, d}}{\max\{f_{t', d}:t' \in d\}}\]
+\noindent\\
+gdje $t$ predstavlja izraz, $d$ predstavlja dokument, odnosno skup svih izraza u promatranom tekstu, $f_{t,d}$ predstavlja broj pojavljivanja izraza u tekstu, a brojnik predstavlja neveći broj pojavljivanja nekog izraza u tekstu. Ova se normalizirana verzija učestalosti pojave izraza koristi radi sprječavanja pristranosti prema velikim tekstovima.
+Druga mjera koju određujemo je inverzna učestalost izraza u dokumentu i računa se na sljedeći način:
+\[ \mathrm{idf}(t, D) =  \log \frac{N}{|\{d \in D: t \in d\}|} \]
+\noindent\\
+gdje $D$ predstavlja skup svih tekstova na kojima računamo učestalost, a nazicnik razlomka predstavlja broj pojavljivanja izraza u tekstu, dok je $N$ ukupan broj dokumenata u skupu $D$.
+Konačna mjera jednaka je umnošku dviju prethodno izračunatih mjera, odnosno: \[ {\displaystyle \mathrm {tfidf} (t,d,D)=\mathrm {tf} (t,d)\cdot \mathrm {idf} (t,D)} \]
+\noindent
+U implementaciji rješenja koristim gotovu metodu iz knjižnice \emph{scikit-learn}. Korištenjem nastalih značajki u \gls{SVM}-modelu dobio sam točnost od $39.5\%$, što je korektan osnovni model s obzirom na točnost nasumičnog odabira koja iznosi $33.3\%$.
+\newpage
+
+Druga značajka koju sam uveo, a koja pripada ovoj kategoriji, temelji se na vektorima riječi iz knjižnice \emph{Spacy}. Radi se o vektorima s 300 dimenzija nastalima primjenom \emph{Word2vec} \citep{w2v} metode. \emph{Word2vec} je model plitke neuronske mreže s dva sloja koji treniranjem pokušava rekonstruirati lingvističko značenje riječi. Kao ulaz koristi vrlo velik skup tekstualnih podataka koji mogu biti raznog porijekla, kao npr.~ članci \emph{Wkipedie}, objave na društvenim mrežama, primjerci elektroničke pošte itd.~Kao rezultat nastaju višedimenzionalni vektori čije se dimenzije obično kreću između $100$ i $1000$ dimenzija. Vektori su u prostoru smješteni na način da su vektori riječi bliskog znanja prostorno bliski jedan drugome.\\
+Koristeći prethodno izrađene informacije proizašle iz metode \emph{tf-idf} kodirao sam ulazne informacije vektorima riječi na način da sam izračunao prosječnu vrijednost vektora svih riječi koje se pojavljuju u mikroblogu, a za broj značajki u tako nastalom vektoru odabrao sam vrijednost broja riječi u najduljem mikroblogu. Poboljšanje nastalo korištenjem ovih značajki značajno je povečalo uspješnost modela koji je nakon treniranja imao točnost od $60.9\%$
+
+\subsubsection{Polaritet i sentiment riječi}
+
+S obzirom na to da je zadatak klasifikacija s obzirom na polaritet mikrobloga, dotakao sam se polariteta i sentimenta samih riječi. Za to sam iskoristio dva leksikona. Prvi od njih je leksikon ocjena riječi temeljen koji sadrži ocjene po atributima zadovoljstva, uzbuđenosti i dominantnosti po imenu  \emph{Affective Norms for English Words} \citep{anew}. Prva verzija sastojala se od nešto više od tisući riječi, no 2013. godine proširena je na $14000$ \citep{anew2}. Pri implementaciji rješenja ugledao sam se na pristup prisutan u repozitoriju \emph{dwzhou/SentimentAnalysis} \citep{anew_code}. Drugi leksikon koji sam koristio je zapravo običan popis pozitivnih i negativnih riječi
+
+\subsubsection{Brojanje prisutnosti elemenata}
+
+U ovoj se kategoriji nalaze značajke nastale brojanjem ili promatranjem prisutnosti raznih elemenata u mikroblogovima. Elementi čiju sam prisutnost naznačavao zastavicama $0$ ili $1$ su: \emph{e-mail} adrese, hiperlinkovi, znakovi valute, datumi, telefonski brojevi itd.~Za neke sam elemente bilježio točan broj pojavljivanja u mikroblogu, a izrazi za koje sam bilježio tu informaciju su: izrazi sa nizanjem znakova (npr.~\emph{"cooool"}), izrazi napisani velikim slovima, cenzurirani izrazi (npr.~\emph{"F***}), broj ponovljenih riječi, pojave takozvanih \emph{hashtagova} i broj uskličnika. Kao dodatnu značajku nadodao sam i ukupan broj riječi u rečenici.
+\noindent Dodavanjem ovih značajki ostvario sam porast točnosti od $0.4\%$, odnosno postigao sam konačnu točnost od $62.32\%$
+
+\subsection{Značajke u dubokom učenju}
 
 \chapter{Zaključak}
+
 Zaključak.
 \bibliography{literatura}
 \bibliographystyle{fer}
