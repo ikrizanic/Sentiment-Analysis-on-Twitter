@@ -1,4 +1,4 @@
-\begin{thebibliography}{9}
+\begin{thebibliography}{12}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -6,13 +6,19 @@
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
 \bibitem[Baziotis et~al.(2017)Baziotis, Pelekis, i
-  Doulkeridis]{datastore-Semeval}
+  Doulkeridis]{datastories-Semeval}
 Christos Baziotis, Nikos Pelekis, i Christos Doulkeridis.
 \newblock Datastories at semeval-2017 task 4: Deep lstm with attention for
   message-level and topic-based sentiment analysis.
 \newblock U \emph{Proceedings of the 11th International Workshop on Semantic
   Evaluation (SemEval-2017)}, stranice 747--754, Vancouver, Canada, August
   2017. Association for Computational Linguistics.
+
+\bibitem[Bird et~al.(2009)Bird, Klein, i Loper]{nltk}
+Steven Bird, Ewan Klein, i Edward Loper.
+\newblock \emph{Natural language processing with Python: analyzing text with
+  the natural language toolkit}.
+\newblock " O'Reilly Media, Inc.", 2009.
 
 \bibitem[Bradley i Lang(1999)]{anew}
 Margaret~M Bradley i Peter~J Lang.
@@ -36,6 +42,11 @@ Mathieu Cliche.
 \newblock Implementations of various sentiment analysis methods in python.
 \newblock URL \url{https://github.com/dwzhou/SentimentAnalysis}.
 \newblock [Online; accessed 13-April-2020].
+
+\bibitem[Jan~Šnajder(2014)]{strojno_skripta}
+Bojana Dalbelo~Bašić Jan~Šnajder.
+\newblock \emph{Strojno učenje}.
+\newblock 2014.
 
 \bibitem[Lozi{\'c} et~al.(2017)Lozi{\'c}, {\v{S}}ari{\'c}, Toki{\'c},
   Medi{\'c}, i {\v{S}}najder]{2017-takelab}
@@ -71,5 +82,11 @@ Amy~Beth Warriner, Victor Kuperman, i Marc Brysbaert.
 \newblock Norms of valence, arousal, and dominance for 13,915 english lemmas.
 \newblock \emph{Behavior research methods}, 45\penalty0 (4):\penalty0
   1191--1207, 2013.
+
+\bibitem[Čupić(2016)]{cupic}
+Marko Čupić.
+\newblock \emph{Umjetna inteligencija}.
+\newblock 2016.
+\newblock URL \url{java.zemris.fer.hr/nastava/ui/}.
 
 \end{thebibliography}

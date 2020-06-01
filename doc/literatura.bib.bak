@@ -55,7 +55,7 @@
     abstract = "In this paper we describe our attempt at producing a state-of-the-art Twitter sentiment classifier using Convolutional Neural Networks (CNNs) and Long Short Term Memory (LSTMs) networks. Our system leverages a large amount of unlabeled data to pre-train word embeddings. We then use a subset of the unlabeled data to fine tune the embeddings using distant supervision. The final CNNs and LSTMs are trained on the SemEval-2017 Twitter dataset where the embeddings are fined tuned again. To boost performances we ensemble several CNNs and LSTMs together. Our approach achieved first rank on all of the five English subtasks amongst 40 teams.",
 }
 
-@InProceedings{datastore-Semeval,
+@InProceedings{datastories-Semeval,
   author    = {Baziotis, Christos  and  Pelekis, Nikos  and  Doulkeridis, Christos},
   title     = {DataStories at SemEval-2017 Task 4: Deep LSTM with Attention for Message-level and Topic-based Sentiment Analysis},
   booktitle = {Proceedings of the 11th International Workshop on Semantic Evaluation (SemEval-2017)},
@@ -111,7 +111,35 @@
   publisher={Springer}
 }
 
+@book{nltk,
+  title={Natural language processing with Python: analyzing text with the natural language toolkit},
+  author={Bird, Steven and Klein, Ewan and Loper, Edward},
+  year={2009},
+  publisher={" O'Reilly Media, Inc."}
+}
 
+@article{svm,
+  title={Support-vector networks},
+  author={Cortes, Corinna and Vapnik, Vladimir},
+  journal={Machine learning},
+  volume={20},
+  number={3},
+  pages={273--297},
+  year={1995},
+  publisher={Springer}
+}
 
+@book{strojno_skripta,
+title={Strojno učenje},
+author={Jan Šnajder, Bojana Dalbelo Bašić},
+year={2014}
+}
 
+@book{cupic,
+ title = {Umjetna inteligencija},
+ subtitle = {Umjetne neuronske mreže},
+ author = {Marko Čupić},
+ year = {2016},
+ url = {java.zemris.fer.hr/nastava/ui/}
+}
 

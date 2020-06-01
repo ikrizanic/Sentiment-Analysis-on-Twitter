@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=latex 2020.5.8)  30 MAY 2020 22:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=latex 2020.5.8)  1 JUN 2020 22:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -437,24 +437,24 @@ Package: glossary-tree 2019/09/28 v4.43 (NLCT)
 \glo@main@file=\write4
 \openout4 = `zavrsni.glo'.
 
-Package glossaries Info: Writing glossary file zavrsni.glo on input line 5.
+Package glossaries Info: Writing glossary file zavrsni.glo on input line 10.
 
 (./zavrsni.aux)
 \openout1 = `zavrsni.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Trying to load font information for T1+ptm on input line 31
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Trying to load font information for T1+ptm on input line 41
 .
  (/usr/share/texmf-dist/tex/latex/psnfss/t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
@@ -500,27 +500,27 @@ Package: ltcaption 2018/08/26 v1.4a longtable captions (AR)
 )
 Package caption Info: supertabular package is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Trying to load font information for T1+phv on input line 42
+LaTeX Font Info:    Trying to load font information for T1+phv on input line 52
 .
 
 (/usr/share/texmf-dist/tex/latex/psnfss/t1phv.fd
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
 )
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 42.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 52.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 42.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 52.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <24.88> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 42.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 52.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <24.88> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 42.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 42.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 52.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 52.
 
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 42.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 52.
 
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -530,7 +530,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \openout3 = `zavrsni.ist'.
 
 ]
-LaTeX Font Info:    Trying to load font information for T1+pcr on input line 45
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 55
 .
 
 (/usr/share/texmf-dist/tex/latex/psnfss/t1pcr.fd
@@ -552,50 +552,63 @@ Poglavlje 1.
 ]
 Poglavlje 2.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <17.28> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 70.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 80.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <17.28> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 70.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 80.
 [2
 
 ]
-Overfull \hbox (3.49948pt too wide) in paragraph at lines 83--83
+Overfull \hbox (3.49948pt too wide) in paragraph at lines 93--93
 []\T1/ptm/b/n/17.28 Rad tima \T1/ptm/b/it/17.28 Ta-ke-Lab \T1/ptm/b/n/17.28 - p
 ris-tup kla-si£-nim stroj-nim u£e-
  []
 
 [3] [4]
 Poglavlje 3.
-LaTeX Font Info:    Trying to load font information for OMS+ptm on input line 9
-5.
+LaTeX Font Info:    Trying to load font information for OMS+ptm on input line 1
+05.
 (/usr/share/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 95.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 105.
  [5
 
-] [6] [7] [8] [9]
+] [6] [7]
+File: ./images/svm2.eps Graphic file (type eps)
+
+<./images/svm2.eps>
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10.95> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 124.
+ [8]
+File: ./images/neuron.eps Graphic file (type eps)
+ <./images/neuron.eps> [9] [10] [11]
+Underfull \hbox (badness 10000) in paragraph at lines 180--185
+
+ []
+
+[12] [13]
 Poglavlje 4.
-(./zavrsni.bbl [10
+(./zavrsni.bbl [14
+
+] [15
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 59--63
+Underfull \hbox (badness 10000) in paragraph at lines 70--74
 \T1/ptm/m/n/12 URL $\T1/pcr/m/n/12 https : / / www . omnicoreagency . com / twi
 tter-[]statistics/$\T1/ptm/m/n/12 .
  []
 
-[11
+) (./zavrsni.gls [16]) [17
 
-]) (./zavrsni.gls [12]) [13
-
-] [14] (./zavrsni.aux) ) 
+] [18] (./zavrsni.aux) ) 
 Here is how much of TeX's memory you used:
- 11504 strings out of 492168
- 186197 string characters out of 6131585
- 314027 words of memory out of 5000000
- 15657 multiletter control sequences out of 15000+600000
- 41639 words of font info for 62 fonts, out of 8000000 for 9000
+ 11589 strings out of 492168
+ 187383 string characters out of 6131585
+ 314491 words of memory out of 5000000
+ 15731 multiletter control sequences out of 15000+600000
+ 51036 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 50i,6n,46p,1972b,291s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 50i,10n,77p,4293b,398s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on zavrsni.dvi (18 pages, 34188 bytes).
+Output written on zavrsni.dvi (22 pages, 49412 bytes).
