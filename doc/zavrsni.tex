@@ -4,6 +4,7 @@
 \renewcommand{\vec}[1]{\mathbf{#1}}
 \usepackage{graphicx}
 \graphicspath{ {./images/}}
+\usepackage{subfig}
 
 
 
@@ -66,7 +67,8 @@ Mikroblogovi su danas jedan od najčešće korištenih i najčešće proučavani
 Ovaj se rad bazira na mikroblogovima društvene platforme Twitter. Takozvani Tweetovi, mikroblogovi platforme Twitter, kratke su poruke sačinjene od najviše $140$ znakova. Prvi je objavljen 2005. godine, a dvije godine kasnije dnevno se objavljivalo $5000$ mikroblogova. Po zadnjim poznatim podatcima taj broj iznosi preko $500$ milijuna objava dnevno \citep{twitterStats}. Radi se o iznimno velikom broju podataka koji kao skup mogu nositi korisne informacije, stoga ne čudi da postoje tvrtke koje u ponudi imaju analizu mikroblogova sa Twittera i drugih društvenih platformi (\textit{brandmentions.com, mention.com}). Povratna informacija korisnika vrijedan je resurs kojim se tvrtke mogu obskrbiti, stoga analiza društvenih platformi ima velik ekonomski i društveni značaj. Obradi tako velikog broja podataka pristupa se tehnikama strojnog učenja, a konkretno područje koje se primjenjuje za ovakve zadatke naziva se obrada prirodnog jezika i još preciznije analiza sentimenta. 
 
 Rad se bavi problemom klasifikacije mikroblogova na one pozitivnog, neutralnog i negativnog sentimenta. Zadatak odgovara podzadatku A, četvrtog zadatka na natjecanju \emph{Semeval 2017}, koji je u vrijeme održavanja privukao $39$ timova iz cijelog svijeta. Ta je godina bila peta u nizu na kojoj se pojavio isti zadatak, što pokazuje interes zajednice za problem analize sentimenta. U sklopu zadatka napravljene su dvije implementacije modela za klasifikaciju. Jedna pripada standardnom strojnom učenju i temelji se na \gls{SVM}-modelu s linearnom jezgrom, a druga pripada području dubokog učenja i temelji se na \Gls{LSTM} inačici modela .
-%TODO struktura rada
+
+Rad je struktruno podijeljen na sljedeći način. U prvom se dijelu nalazi osvrt na radove koji su utjecali na ovaj rad, odnosno glavni izvori koji su bili motivacija za implementacije oba pristupa. U drugom dijelu osvrće se na implementaciju u ovom radu. Prvo se objašnjava odabir pristupa, a zatim i modeli korišteni u pristupima. Također su objašnjenje tehnologije korištene u obradi ulaznih podataka, te konačno i izrada značajki korištenih u treniranju modela. Treći dio rada opisuje podatke koji su korišteni i implementaciji, te prolazi kroz eksperimente i rezultate oba pristupa, da bi ih konačno i usporedio. Na kraju rada nalazi se zaključak i osvrt na moguća poboljšanja implementacije.
 
 \chapter{Povezani radovi}
 
@@ -119,10 +121,10 @@ U rješavanju problema koriste se dva različita pristupa kako bi se osvijestilo
 Strojevi potpornih vektora (engl.~\emph{Support-vector machine}) diskriminativni su modeli korišteni u nadziranom strojnom učenju, a koriste se u rješavanju klasifikacijskih i regresijskih problema \citep{strojno_skripta}. U klasifikaciji se izvorno koriste za binarnu klasifikaciju, stoga implementacija u ovom radu koristi posebnu modifikaciju na koju će se osvrnuti naknadno. \gls{SVM} rješava problem proizvoljnosti hipoteze uvođenjem kriterija maksimalne margine (engl.~\emph{maximum margin}). Naziv dolazi od takozvanih potpornih vektora koji su kombinacija odabranih vektora iz skupa za učenje, a koji omogućuju prikaz hiperravnine kod modela. Proširenje učinkovitosti \gls{SVM}-modela postiže se korištenjem jezgrenih funkcija postupkom trika jezgre (engl.~\emph{kernel trick}). \gls{SVM}-model je linearan: \[ h(\vec{x;w},w_0)=\vec{w}^\mathrm{T}\vec{x} + w_0, \] a za nelinearnost se može upotrijebiti preslikavanje $\phi$. Uz pretpostavku linearne odvojivosti i uzimajući da vrijedi $y\in\{-1,+1\}$ može se konstatirati da vrijedi: \[ \forall(\vec{x}^{(i)}, y^{(i)})\in D: y^{(i)}h(\vec{x}^{(i)})\ge 0.\] Riječima rečeno može se tvrditi da za svaki par vektora značajki i oznake klase vektora postoji predikcija $h(\vec{x})$ koja je istog predznaka kao oznaka klase, odnosno umnožak predikcije i oznake klase uvijek je veći ili jednak $0$. Ukoliko su primjeri linearno odvojivi, postoji beskonačan broj rješenja koji zadovoljavaju navedeni izraz. Traži se rješenje maksimalne margine, što ima smisla jer je u interesu što bolje odvojiti klase primjera. Po definiciji je margina jednaka najmanjoj udaljenosti između $\vec{x}$ i hiperravnine, a cilj je pronaći za koju vrijednost $\vec{x}$ i $w_0$ margina ima maksimalan iznos, što vodi do sljedeće formule za izračun margine:\[ \underset{\mathbf{w}, w_{0}}{\operatorname{argmax}}\left\{\frac{1}{|\mathbf{w}|} \min _{i}\left\{y^{(i)}\left(\mathbf{w}^{\mathrm{T}} \boldsymbol{\phi}\left(\mathbf{x}^{(i)}\right)+w_{0}\right)\right\}\right\}. \] Ovom je formulom teško riješiti optimizacijski problem, pa se stoga problem oblikuje u problem konveksne optimizacije. Uzimajući pretpostavku da za $x^{(i)}$ koji je najbliži margini vrijedi: \[ y^{(i)}\left(\mathbf{w}^{\mathrm{T}} \boldsymbol{\phi}\left(\mathbf{x}^{(i)}\right)+w_{0}\right)=.1 \] Zbog toga mora vrijediti da za $\forall(\vec{x}^{(i)}, y^{(i)}) \in D$  vrijedi:\[ y^{(i)}\left(\mathbf{w}^{\mathrm{T}} \boldsymbol{\phi}\left(\mathbf{x}^{(i)}\right)+w_{0}\right) \geqslant 1, \quad n=1, \ldots, N \] Za primjere za koje vrijedi jednakost kažemo da su ograničenja aktivna, dok za ostale kažemo da su ograničenja neaktivna. Maksimizirana margina ima barem dva aktivna ograničenja, što se može vidjeti na slici \ref{svm_pic}. Širina maksimalne margine iznosi $\frac{2}{||\vec{w}||}$, pa se problem optimizacije može svesti na maksimizaciju izraza: \[\underset{\vec{w}, w_{0}}{\operatorname{argmax}} \frac{1}{ ||\vec{w}||}. \] Kako bi se za optimizaciju mogla primjeniti metoga Lagrangeovih multiplikatora, izraz se piše kao: \[ \underset{\mathbf{w}, w_{0}}{\operatorname{argmin}} \frac{1}{2}\|\mathbf{w}\|^{2}, \] jer minimum $||\vec{w}||^2$ jednak je maksimumu $\frac{1}{||\vec{w}||}$.\\Time se problem svodi na problem kvadratno ograničenog kvadratnog programiranja (engl.~\emph{quadratically constrained quadratic programming)} i može se riješiti primjenom Lagrangeovog multiplikatora. Konačan izraz nastao kombiniranjem ciljne funkcije i uvjeta je sljedeća Lagrangeova funkcija: \[ L\left(\mathbf{w}, w_{0}, \boldsymbol{\alpha}\right)=\frac{1}{2}\|\mathbf{w}\|^{2}-\sum_{i=1}^{N} \alpha_{i}\left\{y^{(i)}\left(\mathbf{w}^{\mathrm{T}} \boldsymbol{\phi}\left(\mathbf{x}^{(i)}\right)+w_{0}\right)-1\right\} .\] U daljnje postupke optimizacije ovaj rad ne ulazi, ali bitno je napomenuti da je rezultat optimizacije $N$-dimenzionalni vektor parametra $\alpha$ te da se klasifikacija neviđenog primjera vrši računanjem sljedećeg izraza, odnosno određujući njegov predznak: \[ h(\mathbf{x})=\mathbf{w}^{\mathrm{T}} \boldsymbol{\phi}(\mathbf{x})+w_{0}=\sum_{i=1}^{N} \alpha_{i} y^{(i)} \boldsymbol{\phi}(\mathbf{x})^{\mathrm{T}} \boldsymbol{\phi}\left(\mathbf{x}^{(i)}\right)+w_{0}. \]
 
 \begin{figure}
-\centering
-\includegraphics[width=0.65\textwidth]{svm2}
-\caption{Maksimalna margina }
-\label{svm_pic}
+	\centering
+	\includegraphics[width=0.65\textwidth]{svm2}
+	\caption{Maksimalna margina }
+	\label{svm_pic}
 \end{figure}
 
 \subsubsection{Problem višeklasne klasifikacije}
@@ -134,29 +136,78 @@ Standarnom upotrebom \gls{SVM}-model radi binarnu klasifikaciju, pa je za višek
 Duboko učenje grana je strojnog učenja čiji se modeli temelje na neuronskim mrežama \citep{cupic}. Postoji mnogo modela i varijacija, a implementacija u ovom radu koristi povratnu neuronsku mrežu (engl.~\emph{Recurrent neural network}) s arhitekturom ćelije s dugoročnom memorijom (engl.~\emph{Long short-term memory}). Ostali poznati modeli neuronskih mreža su konvulucijske neuronske mreže (engl.~\emph{Convolutional neural network}), duboke neuronske mreže (engl.~\emph{Deep neural network}), duboka probabilistička mreža (engl.~\emph{Deep belief network}). Općenito, neuronske mreže složeni su sustavi čija je osnovna gradivna jedinica neuron čiji je zadatak propuštati težinsku sumu kroz prijenosnu funkciju određujući na taj način izlaznu vrijednost. Ulazi u neuron množe se sa težinskim funkcijama $w_{1..n}$ te se sumiraju uz dodatak pomaka (engl.~\emph{bias}) $w_0$ daju vrijednost $z$ koja propuštanjem kroz prijenosnu funkciju daje izlaz $f(z)$ iz neurona. Primjer neurona prikazan je na slici \ref{neuron}.  
 
 \begin{figure}[h]
-\centering
-\includegraphics[width=0.75\textwidth]{neuron}
-\caption{Umjetni neuron}
-\label{neuron}
+	\centering
+	\includegraphics[width=0.75\textwidth]{neuron}
+	\caption{Umjetni neuron}
+	\label{neuron}
 \end{figure}
+
+\subsubsection{Prijenosne funkcije}
 
 Propusne funkcije mogu biti razne, a najčešće su sljedeće:
 \begin{itemize}
-\item binarna step funkcija $f(x)=\left\{\begin{array}{l}0 \text { for } x<0 \\1 \text { for } x \geq 0\end{array}\right.$
-\item sigmoidna funkcija $\sigma(x)=\frac{1}{1+e^{-x}}$
-\item ReLU funkcija $max(0,x)$
-\item tanges funkcija $\tan(x)$
+	\item binarna step funkcija $f(x)=\left\{\begin{array}{l}0 \text { for } x<0 \\1 \text { for } x \geq 0\end{array}\right.$
+	\item sigmoidalna funkcija $\sigma(x)=\frac{1}{1+e^{-x}}$
+	\item ReLU funkcija $max(0,x)$
+	\item tanges hiperbolički funkcija $\tanh(x)$
 \end{itemize}
+Linearno ponašanje nije karakteristično za prirodne pojave, pa stoga linearne prijenosne funkcije nisu pogodne za upotrebu u područjima poput računalnog vida ili obrade prirodnog jezika. Nelinearne funkcije omogućuju bolju procjenu prirodnih fenomena kao što jest jezik. Najkorištenije nelinearne funkcije su sigmoidalna funkcija, tanges funkcija i \emph{ReLU} funkcija. Sigmoidalna funkcija (slika \ref{aktivacijske}(a)) najćešće je korištena funkcija izlaznog sloja kada se radi o binarnoj klasifikaciji jer skuplja sve vrijednosti na interval $[0,1]$. Slična tome je i hiperbolička tanges funkcija (slika \ref{aktivacijske}(b)) koja radi na intervalu $[-1,1]$, ali zbog svoje derivacije pruža snažniji gradijent i možemo ju smatrati superiornijom u odnosu na sigmoidalnu funkciju \citep{akt}. Funkcija koja je najćešće prisutna u \gls{LSTM} arhitekturi \gls{RNN}-a je \emph{ReLU} prijenosna funkcija (slika \ref{aktivacijske}(c)) koja svim negativnim vrijednostima pridaje vrijednost 0, dok pozitivne vrijednosti slijede linearnu funkciju. Postoji varijacija te aktivacijske funkcije po imenu \emph{Leaky ReLU} koja za negativne vrijednosti slijedi funkciju $f(x) = 0.01x$, a za pozitivne se ponaša isto kao \emph{ReLu} i slijedi funkciju $f(x) = x$ ili eventualno $f(x) = kx$.
+
+\begin{figure}
+     \centering
+     \subfloat[][sigmoidalna funkcija]{\includegraphics[width=0.2\textwidth]{sigm}\label{sigm}\hspace{7mm}}
+     \subfloat[][tanh(x)]{\includegraphics[width=0.2\textwidth]{tanh}\label{tanh}\hspace{7mm}}
+     \subfloat[][\emph{ReLU}]{\includegraphics[width=0.2\textwidth]{relu}\label{relu}}
+     \caption{Aktivacijske funkcije}
+     \label{aktivacijske}
+\end{figure}
+
+\subsubsection{Povratne neuronske mreže}
+Arhitektura mreže koja je implementirana u radu je povratna neuronska mreža (\gls{RNN}) koja pripada porodici slojevitih unaprijednih neuronskih mreža. To znači da u sebi nema cikluse, odnosno ulazi neurona ne ovise o izlazima neurona koji se nalaze u dubljim slojevima. Karakteristika povratne neuronske mreže prisutnost je memorije. To im omogućeje obradu sekvencionalnih ulaza, odnosno mreže takvih arhitektura uzimaju u obzir poredak ulaznih podataka i time stvaraju povezanost između ulaza. Princip rada može se objasniti uz pomoć prikaza na slici \ref{rnnprincip}. Za ulaz $x_0$ u prvom koraku vrijedi da je ulaz jednak $x_0$, a za svaki sljedeći ulaz vrijedi da je jednak $x_{t} + h_{t-1}$, odnosno kombinaciji izlaza iz prethodnog koraka i trenutnog ulaza iz skupa ulaznih podataka. Problem koji se javlja u RNN-arhitekturi jest takozvani gubitak gradijenta, odnosno događa se da vrijednost u neuronu postaje toliko beznačajna da je daljnje treniranje gotovo onemogućeno \citep{rnn_training}. Tome se doskače korištenjem ćelije s dugoročnom memorijom (\gls{LSTM}).
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.3\textwidth]{rnn}
+	\caption{Princip ponašanja povratne neuronske mreže}
+	\label{rnnprincip}
+\end{figure}
+
+\subsubsection{Arhitektura ćelije s dugoročnom memorijom}
+Arhitektura ćelije s dugoročnom memorijom (\gls{LSTM}) prikazana je na slici \ref{lstmarh}. Sastoji se od triju ulaznih vrata:
+\begin{itemize}
+	\item ulazna vrata
+	\item vrata za zaboravljanje
+	\item izlazna vrata
+\end{itemize}
+
+Ulazna vrata odgovorna su za odabir vrijednosti koje će modificirati stanje u memoriji. Sastoje se od sigmoidalne i tanges hiperbolične funkcije. Sigmoidalna funkcija odgovorna je za odabir vrijednosti koje će sudjelovati u modifikaciji memorije, a tanges hiperbolični odgovoran je za pridjeljivanje odgovarajuće težine ulazu. Vrata za zaboravljanje odgovorna su za prebiranje vrijednosti iz prethodne iteracije i ulaznog podatka i također funkciniraju na temelju sigmoidalne funkcije. Izlazna vrata određuju izlaz koristeći ulazni podatak i stanje u memoriji, a kada je riječ o prijenosnim funkcijama izvedba im je jedanaka ulaznim vratima. Funkcionalnost \gls{LSTM} arhitekture zapisana jednadžbama je sljedeća: \[ \begin{aligned}
+f_{t} &=\sigma_{g}\left(W_{f} x_{t}+U_{f} h_{t-1}+b_{f}\right) \\
+i_{t} &=\sigma_{g}\left(W_{i} x_{t}+U_{i} h_{t-1}+b_{i}\right) \\
+o_{t} &=\sigma_{g}\left(W_{o} x_{t}+U_{o} h_{t-1}+b_{o}\right) \\
+\tilde{c}_{t} &=\sigma_{h}\left(W_{c} x_{t}+U_{c} h_{t-1}+b_{c}\right) \\
+c_{t} &=f_{t} \circ c_{t-1}+i_{t} \circ \tilde{c}_{t} \\
+h_{t} &=o_{t} \circ \sigma_{h}\left(c_{t}\right)
+\end{aligned}, \]
+gdje je $x_t$ vektor ulaznih podataka, $f_t$ aktivacijski vektor vrata za zaborav, $o_t$ aktivacijski vektor izlanih vrata, $i_t$ aktivacijski vektor ulaznih vrata, $h_t$ izlazni vektor \gls{LSTM}-a, $\tilde{c}_t$ aktivacijski vektor ulaza u ćeliju, $c_t$ vektor stanja ćelije i konačno $W, U$ i $b$ matrice težina i pomaka koje je potrebno naučiti tjekom treniranja.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.65\textwidth]{lstm}
+	\caption{\gls{LSTM} arhitektura}
+	\label{lstmarh}
+\end{figure}
+
+
 
 \section{Obrada ulaznih podataka}
 
-Zbog prirode mikroblogova ulazni su podatci prošarani raznim značajkama koje je potrebno ukloniti ili preinačiti. Pri stvaranju podataka pogodnih za izradu značajki odlučio sam se na izradu dvije vrste podataka.\\
-\noindent Prva je jednostavna i služila mi je za izradu značajki temeljenih na frekvencijama riječi ili vektorima riječi. Dobio sam ju tako što sam prvo proveo zamijenu emotikona sa njihovom jezičnom reprezentacijom u smislu da je npr.~":-)" pretvoreno u \emph{"happy"}. Zatim sam proveo uklanjanje svih nejezičnih elemenata kao što su hiperlinkovi, korisnička imena, emotikoni, brojevi i slično. Mikroblogove sam rastavio na riječi koristeći biblioteku \emph{Spacy} te sam nad dobivenim skupom jezičnih elemenata proveo postupak ispravljanja pravopisa i prepoznavanje žargona. Uklonio sam riječi koje ne doprinose značenju. Takve se riječi nazivaju zaustavne riječi (engl.~\emph{stop-words}) i uklonio sam ih koristeći biblioteku za obradu prirodnog jezika \emph{Natural Language Toolkit (NLTK)} \citep{nltk}. Na preostalim riječima proveo sam postupak lematiziranja, odnosno pretvaranja riječi iz izvedenog oblika u njen korijenski oblik, takozvanu lemu. Za postupak lematiziranja koristio sam \texttt{WordNetLemmatizer} iz spomenute biblioteke \gls{NLTK}.\\
-\noindent Druga vrsta sastoji se od mikroblogova koji su označeni koristeći alat koji je napravio spomenuti tim \emph{DataStories} s natjecanja \emph{Semeval} \citep{datastories-Semeval}. U mikroblogu se ovim postupkom označavaju elementi poput hiperlinkova, cenzuriranih riječi, brojeva, riječi napisanih velikim slovima, korisničkih imena i slično. Takve sam podatke ostavio u obliku teksta, odnosno nisam ih razlomio na manje elemente, jer sam ih koristio za prebrojavanje prisutnosti spomenutih elemenata.
+Zbog prirode mikroblogova ulazni su podatci prošarani raznim značajkama koje je potrebno ukloniti ili preinačiti. Pri stvaranju podataka pogodnih za izradu značajki nastale su dvije vrste podataka.\\
+\noindent Prva je jednostavna i služi izradi značajki temeljenih na frekvencijama riječi ili vektorima riječi. Dobivena je tako što je prvo provedena zamijena emotikona s njihovom jezičnom reprezentacijom u smislu da je npr.~":-)" pretvoreno u \emph{"happy"}. Zatim je provedeno uklanjanje svih nejezičnih elemenata kao što su hiperlinkovi, korisnička imena, emotikoni, brojevi i slično. Mikroblogovi su rastavljeni na riječi koristeći biblioteku \emph{Spacy} te je nad dobivenim skupom jezičnih elemenata proveden postupak ispravljanja pravopisa i prepoznavanje žargona. Uklonjene su riječi koje ne doprinose značenju. Takve se riječi nazivaju zaustavne riječi (engl.~\emph{stop-words}) i uklonjene su koristeći biblioteku za obradu prirodnog jezika \emph{Natural Language Toolkit (NLTK)} \citep{nltk}. Na preostalim riječima proveden je postupak lematiziranja, odnosno pretvaranja riječi iz izvedenog oblika u njen korijenski oblik, takozvanu lemu. Za postupak lematiziranja korišten je \texttt{WordNetLemmatizer} iz spomenute biblioteke \gls{NLTK}.\\
+\noindent Druga vrsta sastoji se od mikroblogova koji su označeni koristeći alat koji je napravio spomenuti tim \emph{DataStories} s natjecanja \emph{Semeval} \citep{datastories-Semeval}. U mikroblogu se ovim postupkom označavaju elementi poput hiperlinkova, cenzuriranih riječi, brojeva, riječi napisanih velikim slovima, korisničkih imena i slično. Takve su podatci ostavljeni u obliku teksta, odnosno nisu razlomljeni na manje elemente, jer su korišteni za prebrojavanje prisutnosti spomenutih elemenata.
 
 \section{Značajke}
 
-S obzirom na to da paralelno koristim dva pristupa izrade i treninga modela, izrada i korištenje značajki također je podijeljena u dva smjera. Izrada značajki za klasično strojno učenje znatno je opsežniji i kreativniji proces nego izrada istih za pristup dubokim učenjem. Moglo bi se reći da je srž klasičnog pristupa upravo u izradi značajki jer se modeli sami po sebi ne mogu značajno konfigurirati, pa rezultat najviše ovisi o onome što mu na ulazu pružimo. Kod dubokog učenja postoje jednostavni standardni pristupi koji su ponekad gotovo mandatorni. 
+S obzirom na to da se paralelno koriste dva pristupa izrade i treninga modela, izrada i korištenje značajki također je podijeljena u dva smjera. Izrada značajki za klasično strojno učenje znatno je opsežniji i kreativniji proces nego izrada istih za pristup dubokim učenjem. Moglo bi se reći da je srž klasičnog pristupa upravo u izradi značajki jer se modeli sami po sebi ne mogu značajno konfigurirati, pa rezultat najviše ovisi o onome što mu se na ulazu pruži. Kod dubokog učenja postoje jednostavni standardni pristupi koji su ponekad gotovo mandatorni. 
 
 
 \subsection{Značajke u klasičnom pristupu}
@@ -185,33 +236,35 @@ Koristeći prethodno izrađene informacije proizašle iz metode \emph{tf-idf} ko
 
 \subsubsection{Polaritet i sentiment riječi}
 
-S obzirom na to da je zadatak klasifikacija s obzirom na polaritet mikrobloga, dotakao sam se polariteta i sentimenta samih riječi. Za to sam iskoristio dva leksikona. Prvi od njih je leksikon ocjena riječi temeljen koji sadrži ocjene po atributima zadovoljstva, uzbuđenosti i dominantnosti po imenu  \emph{Affective Norms for English Words} \citep{anew}. Prva verzija sastojala se od nešto više od tisući riječi, no 2013. godine proširena je na $14000$ \citep{anew2}. Pri implementaciji rješenja ugledao sam se na pristup prisutan u repozitoriju \emph{dwzhou/SentimentAnalysis} \citep{anew_code}. Drugi leksikon koji sam koristio je zapravo običan popis pozitivnih i negativnih riječi. %TODO nađi link
+S obzirom na to da je zadatak klasifikacija s obzirom na polaritet mikrobloga, bilo je nužno dotaknuti se polariteta i sentimenta samih riječi. Za to su iskorištena dva leksikona. Prvi od njih je leksikon ocjena riječi koji sadrži ocjene po atributima zadovoljstva, uzbuđenosti i dominantnosti po imenu  \emph{Affective Norms for English Words} \citep{anew}. Prva verzija sastojala se od nešto više od tisući riječi, no 2013. godine proširena je na $14000$ \citep{anew2}. Pri implementaciji rješenja korišten je pristup temeljen na pristupu koji je prisutan u repozitoriju \emph{dwzhou/SentimentAnalysis} \citep{anew_code}. Drugi leksikon koji je korišten je zapravo običan popis pozitivnih i negativnih riječi \citep{leksikon}. 
 \noindent Dodavanjem značajki dobivenih korištenjem leksikona podigao sam točnost modela za $1\%$, odnosno postigao točnost od $61.9\%$.
 
 \subsubsection{Brojanje prisutnosti elemenata}
 
-U ovoj se kategoriji nalaze značajke nastale brojanjem ili promatranjem prisutnosti raznih elemenata u mikroblogovima. Elementi čiju sam prisutnost naznačavao zastavicama $0$ ili $1$ su: \emph{e-mail} adrese, hiperlinkovi, znakovi valute, datumi, telefonski brojevi itd.~Za neke sam elemente bilježio točan broj pojavljivanja u mikroblogu, a izrazi za koje sam bilježio tu informaciju su: izrazi sa nizanjem znakova (npr.~\emph{"cooool"}), izrazi napisani velikim slovima, cenzurirani izrazi (npr.~\emph{"F***}), broj ponovljenih riječi, pojave takozvanih \emph{hashtagova} i broj uskličnika. Kao dodatnu značajku nadodao sam i ukupan broj riječi u rečenici.
-\noindent Dodavanjem ovih značajki ostvario sam porast točnosti od $0.4\%$, odnosno postigao sam konačnu točnost od $62.32\%$
+U ovoj se kategoriji nalaze značajke nastale brojanjem ili promatranjem prisutnosti raznih elemenata u mikroblogovima. Elementi čija je prisutnost naznačavana zastavicama $0$ ili $1$ su: \emph{e-mail} adrese, hiperlinkovi, znakovi valute, datumi, telefonski brojevi itd.~Za neke se elemente bilježio točan broj pojavljivanja u mikroblogu, a izrazi za koje je bilježena ta informaciju su: izrazi s nizanjem znakova (npr.~\emph{"cooool"}), izrazi napisani velikim slovima, cenzurirani izrazi (npr.~\emph{"F***}), broj ponovljenih riječi, pojave takozvanih \emph{hashtagova} i broj uskličnika. Kao dodatna značajka nadodan je i ukupan broj riječi u rečenici.
+\noindent Dodavanjem ovih značajki ostvaren je porast točnosti od $0.4\%$, odnosno postignuta je konačna točnost \gls{SVM}-modela od $62.32\%$.
 
 \subsection{Značajke u dubokom učenju}
 
-Izrada značajki korištenih u modelu dubokog učenja znatno je jednostavnija. Potrebno je izgraditi vokabular riječi koje se pojavljuju u skupu podataka i svakoj riječi u vokabularu pridjeliti redni broj koji će služiti kao oznaka riječi. Zatim je potrebno izgraditi matricu vektora riječi (engl.~\emph{embedding matrix}) koja se sastoji od onoliko stupaca koliko vektor riječi ima dimenzija, što je u slučaju moje implementacije 300 dimenzija. U redovima su po rednim brojevima iz vokabulara kodirane riječi odgovarajučim vektorima riječi. Model tjekom inicijalizacije prima matricu vektora. Pomoću izrađenog vokabulara vrši se kodiranje sadržaja mikroblogova, odnosno umjesto tekstualnog sadržaja mikroblogovi postaju vektori brojeva koji predstavljaju redni broj riječi u bokabularu. Radi konzistentnosti dimenzija odabrana je maksimalna veličina vektora koja odgovara najvećem vektoru u skupu podataka za treniranje, a svi manji vektori nadopunjavaju se nulama do željene veličine. Takav skup vektora predaje se modelu kao ulaz u treningu i u evaluaciji modela.
+Izrada značajki korištenih u modelu dubokog učenja znatno je jednostavnija. Potrebno je izgraditi vokabular riječi koje se pojavljuju u skupu podataka i svakoj riječi u vokabularu pridjeliti redni broj koji će služiti kao oznaka riječi. Zatim je potrebno izgraditi matricu vektora riječi (engl.~\emph{embedding matrix}) koja se sastoji od onoliko stupaca koliko vektor riječi ima dimenzija, što je u slučaju ove implementacije 300 dimenzija. U redovima su po rednim brojevima iz vokabulara kodirane riječi odgovarajučim vektorima riječi. Model tjekom inicijalizacije prima matricu vektora. Pomoću izrađenog vokabulara vrši se kodiranje sadržaja mikroblogova, odnosno umjesto tekstualnog sadržaja mikroblogovi postaju vektori brojeva koji predstavljaju redni broj riječi u vokabularu. Radi konzistentnosti dimenzija odabrana je maksimalna veličina vektora koja odgovara najvećem vektoru u skupu podataka za treniranje, a svi manji vektori nadopunjavaju se nulama do željene veličine. Takav skup vektora predaje se modelu kao ulaz u treningu i u evaluaciji modela.
 
 \chapter{Zaključak}
 
-Zaključak.
+%TODO
+
 \bibliography{literatura}
 \bibliographystyle{fer}
 \printglossaries
 
 \begin{sazetak}
-Sažetak na hrvatskom jeziku.
+Ovaj se rad bavi analizom sentimenta u mikroblogovima društvene platforme \emph{Twitter}. Proučavanje teme analize sentimenta ostvareno je uz pomoć četvrtoga zadatka s najtecanja \emph{Semeval} koji je bio vrlo popularan zadatak nekoliko godina u nizu u kojima se natjecanje održavalo. Napravljena je usporedba pristupa klasičnim strojnim učenjem, odnosno korištenja \gls{SVM}-modela i pristupa dubokog učenja, odnosno korištenja povratne neuronske mreže (\gls{RNN}) s arhitekturom ćelije s dugoročnom memorijom (\gls{LSTM}). S pristupom klasičnog strojnog učenja ostvarena je točnost od $62.3\%$, a pristupom dubokog učenja osvarena je nešto bolja točnost od $64\%$, što implementaciju stavlja na 11. mjesto implementacija koje su bile predane u sklopu natjecanja 2017. godine.
 
-\kljucnerijeci{strojno učenje, duboko učenje, obrada prirodnog jezika, analiza sentimenta, analiza mikroblogova, Semeval}
+\kljucnerijeci{strojno učenje, duboko učenje, obrada prirodnog jezika, analiza sentimenta, analiza mikroblogova, Semeval} 
 \end{sazetak}
 
-% TODO: Navedite naslov na engleskom jeziku.
-\engtitle{ 	Machine Learning for Sentiment Analysis in Microblogs}
+The theme of this thesis is sentiment analysis on microblogs from the social platform \emph{Twitter}. %TODO
+
+\engtitle{Machine Learning for Sentiment Analysis in Microblogs}
 \begin{abstract}
 Abstract.
 

@@ -5,47 +5,48 @@ The style file: fer.bst
 Database file #1: literatura.bib
 Warning--empty year in anew_code
 Warning--empty publisher in strojno_skripta
+Warning--empty year in akt
 Warning--empty journal in semeval2017task4
 Warning--empty publisher in cupic
-You've used 12 entries,
+You've used 15 entries,
             2773 wiz_defined-function locations,
-            665 strings with 7124 characters,
-and the built_in function-call counts, 5224 in all, are:
-= -- 474
-> -- 258
-< -- 10
-+ -- 90
-- -- 78
-* -- 380
-:= -- 796
-add.period$ -- 46
-call.type$ -- 12
-change.case$ -- 60
-chr.to.int$ -- 12
-cite$ -- 28
-duplicate$ -- 260
-empty$ -- 446
-format.name$ -- 92
-if$ -- 1113
+            679 strings with 7522 characters,
+and the built_in function-call counts, 6477 in all, are:
+= -- 588
+> -- 308
+< -- 13
++ -- 108
+- -- 93
+* -- 458
+:= -- 971
+add.period$ -- 55
+call.type$ -- 15
+change.case$ -- 74
+chr.to.int$ -- 15
+cite$ -- 35
+duplicate$ -- 325
+empty$ -- 567
+format.name$ -- 110
+if$ -- 1391
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 11
-newline$ -- 75
-num.names$ -- 48
-pop$ -- 153
+missing$ -- 12
+newline$ -- 90
+num.names$ -- 60
+pop$ -- 193
 preamble$ -- 1
-purify$ -- 50
+purify$ -- 61
 quote$ -- 0
-skip$ -- 194
+skip$ -- 253
 stack$ -- 0
-substring$ -- 151
-swap$ -- 41
-text.length$ -- 3
+substring$ -- 197
+swap$ -- 56
+text.length$ -- 4
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 117
-warning$ -- 4
-while$ -- 47
+type$ -- 150
+warning$ -- 5
+while$ -- 59
 width$ -- 0
-write$ -- 172
-(There were 4 warnings)
+write$ -- 208
+(There were 5 warnings)
