@@ -248,6 +248,21 @@ U ovoj se kategoriji nalaze značajke nastale brojanjem ili promatranjem prisutn
 
 Izrada značajki korištenih u modelu dubokog učenja znatno je jednostavnija. Potrebno je izgraditi vokabular riječi koje se pojavljuju u skupu podataka i svakoj riječi u vokabularu pridjeliti redni broj koji će služiti kao oznaka riječi. Zatim je potrebno izgraditi matricu vektora riječi (engl.~\emph{embedding matrix}) koja se sastoji od onoliko stupaca koliko vektor riječi ima dimenzija, što je u slučaju ove implementacije 300 dimenzija. U redovima su po rednim brojevima iz vokabulara kodirane riječi odgovarajučim vektorima riječi. Model tjekom inicijalizacije prima matricu vektora. Pomoću izrađenog vokabulara vrši se kodiranje sadržaja mikroblogova, odnosno umjesto tekstualnog sadržaja mikroblogovi postaju vektori brojeva koji predstavljaju redni broj riječi u vokabularu. Radi konzistentnosti dimenzija odabrana je maksimalna veličina vektora koja odgovara najvećem vektoru u skupu podataka za treniranje, a svi manji vektori nadopunjavaju se nulama do željene veličine. Takav skup vektora predaje se modelu kao ulaz u treningu i u evaluaciji modela.
 
+\chapter{Provedba eksperimenata}
+
+Ovo poglavlje opisuje proces provođenja eksperimenata i osvrće se na postignute rezultate. Detaljno opisuje karakteristike implementacija i uspoređuje učinke izmjena modela koje su se činile tijekom eksperimentiranja, kao i podešavanje hiperparametara.
+
+\section{Podatci}
+
+Skup podataka za trening sastoji se od $49491$ mikroblogova, dok se skup podataka za testiranje sastoji od $12258$ mikroblogova. Podatci su odmah podijeljeni na one za treniranje i one za testiranje jer je sam skup podataka proizašao iz natjecanja \emph{Semeval 2017}, pa su korišteni originalni podatci za odgovarajuće faze natjecanja, tako da su rezultati postignuti na testnom skupu podataka mjerodavni onima koji su dobiveni kao rezultati natjecanja. Podatci se strukturno sastoje od identifikacijskih brojeva objava, oznake polariteta objave i teksta objave. Identifikacijske oznake izbačene su prilikom učitavanja jer niti jedna značajka ne proizlazi iz njih. 
+Primjer jedne originalne objave:\\\\
+\texttt{
+"(OFF TOPIC) - there is only 3 episodes on the first disk of \#Dexter. Please hurry, @netflix with the 2nd \#fitblog" 
+}
+
+Ti su podatci obradom poprimili oblik prikladan izvlačenju značajki, pa je prethodno spomenuta objava pretvorena u dvije vrste podataka. Prva vrsta jest popis riječi koje se nalaze u objavi, a koje ne pripadaju zaustavnim riječim (enlg.~\emph{stop-words}).
+
+
 \chapter{Zaključak}
 
 %TODO

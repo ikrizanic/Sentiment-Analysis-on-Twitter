@@ -68,7 +68,7 @@ Ovaj se rad bazira na mikroblogovima društvene platforme Twitter. Takozvani Twe
 
 Rad se bavi problemom klasifikacije mikroblogova na one pozitivnog, neutralnog i negativnog sentimenta. Zadatak odgovara podzadatku A, četvrtog zadatka na natjecanju \emph{Semeval 2017}, koji je u vrijeme održavanja privukao $39$ timova iz cijelog svijeta. Ta je godina bila peta u nizu na kojoj se pojavio isti zadatak, što pokazuje interes zajednice za problem analize sentimenta. U sklopu zadatka napravljene su dvije implementacije modela za klasifikaciju. Jedna pripada standardnom strojnom učenju i temelji se na \gls{SVM}-modelu s linearnom jezgrom, a druga pripada području dubokog učenja i temelji se na \Gls{LSTM} inačici modela .
 
-Rad je struktruno podijeljen na sljedeći način. U prvom se dijelu nalazi osvrt na radove koji su utjecali na ovaj rad, odnosno glavni izvori koji su bili motivacija za implementacije oba pristupa. U drugom dijelu osvrće se na implementaciju u ovom radu. Prvo se objašnjava odabir pristupa, a zatim i modeli korišteni u pristupima. Također su objašnjenje tehnologije korištene u obradi ulaznih podataka, te konačno i izrada značajki korištenih u treniranj
+Rad je struktruno podijeljen na sljedeći način. U prvom se dijelu nalazi osvrt na radove koji su utjecali na ovaj rad, odnosno glavni izvori koji su bili motivacija za implementacije oba pristupa. U drugom dijelu osvrće se na implementaciju u ovom radu. Prvo se objašnjava odabir pristupa, a zatim i modeli korišteni u pristupima. Također su objašnjenje tehnologije korištene u obradi ulaznih podataka, te konačno i izrada značajki korištenih u treniranju modela. Treći dio rada opisuje podatke koji su korišteni i implementaciji, te prolazi kroz eksperimente i rezultate oba pristupa, da bi ih konačno i usporedio. Na kraju rada nalazi se zaključak i osvrt na moguća poboljšanja implementacije.
 
 \chapter{Povezani radovi}
 
@@ -248,6 +248,18 @@ U ovoj se kategoriji nalaze značajke nastale brojanjem ili promatranjem prisutn
 
 Izrada značajki korištenih u modelu dubokog učenja znatno je jednostavnija. Potrebno je izgraditi vokabular riječi koje se pojavljuju u skupu podataka i svakoj riječi u vokabularu pridjeliti redni broj koji će služiti kao oznaka riječi. Zatim je potrebno izgraditi matricu vektora riječi (engl.~\emph{embedding matrix}) koja se sastoji od onoliko stupaca koliko vektor riječi ima dimenzija, što je u slučaju ove implementacije 300 dimenzija. U redovima su po rednim brojevima iz vokabulara kodirane riječi odgovarajučim vektorima riječi. Model tjekom inicijalizacije prima matricu vektora. Pomoću izrađenog vokabulara vrši se kodiranje sadržaja mikroblogova, odnosno umjesto tekstualnog sadržaja mikroblogovi postaju vektori brojeva koji predstavljaju redni broj riječi u vokabularu. Radi konzistentnosti dimenzija odabrana je maksimalna veličina vektora koja odgovara najvećem vektoru u skupu podataka za treniranje, a svi manji vektori nadopunjavaju se nulama do željene veličine. Takav skup vektora predaje se modelu kao ulaz u treningu i u evaluaciji modela.
 
+\chapter{Provedba eksperimenata}
+
+Ovo poglavlje opisuje proces provođenja eksperimenata i osvrće se na postignute rezultate. Detaljno opisuje karakteristike implementacija i uspoređuje učinke izmjena modela koje su se činile tijekom eksperimentiranja, kao i podešavanje hiperparametara.
+
+\section{Podatci}
+
+Skup podataka za trening sastoji se od $49491$ mikroblogova, dok se skup podataka za testiranje sastoji od $12258$ mikroblogova. Podatci su odmah podijeljeni na one za treniranje i one za testiranje jer je sam skup podataka proizašao iz natjecanja \emph{Semeval 2017}, pa su korišteni originalni podatci za odgovarajuće faze natjecanja, tako da su rezultati postignuti na testnom skupu podataka mjerodavni onima koji su dobiveni kao rezultati natjecanja. Podatci se strukturno sastoje od identifikacijskih brojeva objava, oznake polariteta objave i teksta objave. Identifikacijske oznake izbačene su prilikom učitavanja jer niti jedna značajka ne proizlazi iz njih. 
+Primjer nekoliko originalnih objava:\\\\
+\texttt{"I forgot how sad the first episode of the 5th season of \\Dexter is. \#depressing \#dexter \#darkpassenger"\\\\
+"Oct. 2 is almost too far away for me to wait for the return of \#Dexter!"\\\\
+"(OFF TOPIC) - there is only 3 episodes on the first disk of \#Dexter. Please hurry, @netflix with the 2nd \#fitblog" 
+}
 \chapter{Zaključak}
 
 %TODO

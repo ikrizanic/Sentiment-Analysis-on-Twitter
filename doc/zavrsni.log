@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=latex 2020.5.8)  2 JUN 2020 22:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=latex 2020.5.8)  3 JUN 2020 19:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -624,9 +624,23 @@ Underfull \hbox (badness 10000) in paragraph at lines 231--236
 
 [15] [16] [17]
 Poglavlje 4.
-(./zavrsni.bbl [18
 
-] [19
+Underfull \hbox (badness 10000) in paragraph at lines 257--262
+
+ []
+
+
+Overfull \hbox (19.43484pt too wide) in paragraph at lines 257--262
+\T1/pcr/m/n/12 "(OFF TOPIC) - there is only 3 episodes on the first disk of
+ []
+
+[18
+
+]
+Poglavlje 5.
+(./zavrsni.bbl [19
+
+] [20
 
 ]
 Underfull \hbox (badness 2005) in paragraph at lines 76--80
@@ -646,9 +660,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 88--92
 tter-[]statistics/$\T1/ptm/m/n/12 .
  []
 
-) (./zavrsni.gls [20]) [21
+) (./zavrsni.gls [21]) [22
 
-] [22] (./zavrsni.aux) ) 
+] [23] (./zavrsni.aux) ) 
 Here is how much of TeX's memory you used:
  11775 strings out of 492168
  190313 string characters out of 6131585
@@ -658,4 +672,4 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  50i,10n,87p,4293b,490s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on zavrsni.dvi (26 pages, 58856 bytes).
+Output written on zavrsni.dvi (27 pages, 61148 bytes).

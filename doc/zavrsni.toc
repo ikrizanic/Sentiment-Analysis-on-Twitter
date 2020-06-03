@@ -20,5 +20,7 @@
 \contentsline {subsubsection}{Polaritet i sentiment riječi}{16}% 
 \contentsline {subsubsection}{Brojanje prisutnosti elemenata}{16}% 
 \contentsline {subsection}{\numberline {3.4.2}Značajke u dubokom učenju}{17}% 
-\contentsline {chapter}{\numberline {4}Zaključak}{18}% 
-\contentsline {chapter}{Literatura}{19}% 
+\contentsline {chapter}{\numberline {4}Provedba eksperimenata}{18}% 
+\contentsline {section}{\numberline {4.1}Podatci}{18}% 
+\contentsline {chapter}{\numberline {5}Zaključak}{19}% 
+\contentsline {chapter}{Literatura}{20}% 
