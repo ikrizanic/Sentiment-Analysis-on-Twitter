@@ -257,10 +257,27 @@ Ovo poglavlje opisuje proces provođenja eksperimenata i osvrće se na postignut
 Skup podataka za trening sastoji se od $49491$ mikroblogova, dok se skup podataka za testiranje sastoji od $12258$ mikroblogova. Podatci su odmah podijeljeni na one za treniranje i one za testiranje jer je sam skup podataka proizašao iz natjecanja \emph{Semeval 2017}, pa su korišteni originalni podatci za odgovarajuće faze natjecanja, tako da su rezultati postignuti na testnom skupu podataka mjerodavni onima koji su dobiveni kao rezultati natjecanja. Podatci se strukturno sastoje od identifikacijskih brojeva objava, oznake polariteta objave i teksta objave. Identifikacijske oznake izbačene su prilikom učitavanja jer niti jedna značajka ne proizlazi iz njih. 
 Primjer jedne originalne objave:\\\\
 \texttt{
-"(OFF TOPIC) - there is only 3 episodes on the first disk of \#Dexter. Please hurry, @netflix with the 2nd \#fitblog" 
-}
+"(OFF TOPIC) - there is only 3 episodes on the first disk \\of \#Dexter. Please hurry, @netflix with the 2nd \#fitblog" 
+}\\
 
-Ti su podatci obradom poprimili oblik prikladan izvlačenju značajki, pa je prethodno spomenuta objava pretvorena u dvije vrste podataka. Prva vrsta jest popis riječi koje se nalaze u objavi, a koje ne pripadaju zaustavnim riječim (enlg.~\emph{stop-words}).
+Ti su podatci obradom poprimili oblik prikladan izvlačenju značajki, pa je prethodno spomenuta objava pretvorena u dvije vrste podataka. Prva vrsta jest popis riječi koje se nalaze u objavi, a koje ne pripadaju zaustavnim riječim (enlg.~\emph{stop-words}), a druga vrsta je tekst koji sadrži oznake bitnih elemenata i svojstava objave. Primjer obje vrste podataka:\\\\
+\texttt{['topic', 'episode', 'first', 'disk', 'dexter', 'please',\\ 'hurry', 'fit', 'web', 'log']}\\\\
+\texttt{( <allcaps> off topic </allcaps> ) - there is only <number> episodes on the first disk \\of <hashtag> dexter </hashtag> . please hurry , <user> with the 2 nd <hashtag> fit blog </hashtag>}.
+
+\begin{table}
+\centering
+\begin{tabular}{|l|l|l|l|} 
+\hline
+                     &pozitivni             &neutralni             &negativni                       \\ 
+\hline
+Podatci za treniranje& 19652 (39.64\%) & 22195 (44.78\%) & 7723 (15.58\%)  \\ 
+\hline
+Podatci za testiranje& 2375 (19.33\%)                   &                      &                       \\ 
+\hline
+\multicolumn{1}{l}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l}{} 
+\caption{Zastupljenost polariteta mikroblogova u podatcima}
+\end{tabular}
+\end{table}
 
 
 \chapter{Zaključak}
