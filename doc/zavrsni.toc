@@ -1,31 +1,31 @@
 \babel@toc {croatian}{}
-\contentsline {chapter}{\numberline {1}Uvod}{1}% 
-\contentsline {chapter}{\numberline {2}Povezani radovi}{3}% 
-\contentsline {section}{\numberline {2.1}Rad tima \emph {BB\_twtr} - najuspješniji model današnjice}{3}% 
-\contentsline {section}{\numberline {2.2}Rad tima \emph {DataStories}}{4}% 
-\contentsline {section}{\numberline {2.3}Rad tima \emph {TakeLab} - pristup klasičnim strojnim učenjem}{5}% 
-\contentsline {chapter}{\numberline {3}Implementacija}{6}% 
-\contentsline {section}{\numberline {3.1}O zadatku 4 natjecanja \emph {Semeval 2017} i analizi sentimenta u mikroblogovima}{6}% 
-\contentsline {section}{\numberline {3.2}Odabir metoda i pristupa}{7}% 
-\contentsline {subsection}{\numberline {3.2.1}Klasično strojno učenje - \gls {SVM}-model}{7}% 
-\contentsline {subsubsection}{Problem višeklasne klasifikacije}{9}% 
-\contentsline {subsection}{\numberline {3.2.2}Duboko učenje}{10}% 
-\contentsline {subsubsection}{Prijenosne funkcije}{11}% 
-\contentsline {subsubsection}{Povratne neuronske mreže}{11}% 
-\contentsline {subsubsection}{Arhitektura ćelije s dugoročnom memorijom}{12}% 
-\contentsline {section}{\numberline {3.3}Obrada ulaznih podataka}{13}% 
-\contentsline {section}{\numberline {3.4}Značajke}{14}% 
-\contentsline {subsection}{\numberline {3.4.1}Značajke u klasičnom pristupu}{14}% 
-\contentsline {subsubsection}{Brojanje riječi i vektori riječi}{15}% 
-\contentsline {subsubsection}{Polaritet i sentiment riječi}{16}% 
-\contentsline {subsubsection}{Brojanje prisutnosti elemenata}{16}% 
-\contentsline {subsection}{\numberline {3.4.2}Značajke u dubokom učenju}{17}% 
-\contentsline {chapter}{\numberline {4}Provedba eksperimenata}{18}% 
-\contentsline {section}{\numberline {4.1}Podatci}{18}% 
-\contentsline {subsubsection}{Sastav}{19}% 
-\contentsline {section}{\numberline {4.2}Eksperimentiranje}{19}% 
-\contentsline {subsection}{\numberline {4.2.1}\gls {SVM}-model}{19}% 
-\contentsline {subsection}{\numberline {4.2.2}\gls {LSTM}-model}{20}% 
-\contentsline {subsubsection}{Optimizacijska funkcija}{21}% 
-\contentsline {chapter}{\numberline {5}Zaključak}{22}% 
-\contentsline {chapter}{Literatura}{23}% 
+\contentsline {chapter}{\numberline {1}Uvod}{1}%
+\contentsline {chapter}{\numberline {2}Povezani radovi}{3}%
+\contentsline {section}{\numberline {2.1}Rad tima \emph {BB\_twtr} - najuspješniji model današnjice}{3}%
+\contentsline {section}{\numberline {2.2}Rad tima \emph {DataStories}}{4}%
+\contentsline {section}{\numberline {2.3}Rad tima \emph {TakeLab} - pristup klasičnim strojnim učenjem}{5}%
+\contentsline {chapter}{\numberline {3}Implementacija}{6}%
+\contentsline {section}{\numberline {3.1}O zadatku 4 natjecanja \emph {Semeval 2017} i analizi sentimenta u mikroblogovima}{6}%
+\contentsline {section}{\numberline {3.2}Odabir metoda i pristupa}{7}%
+\contentsline {subsection}{\numberline {3.2.1}Klasično strojno učenje - \gls {SVM}-model}{7}%
+\contentsline {subsubsection}{Problem višeklasne klasifikacije}{9}%
+\contentsline {subsection}{\numberline {3.2.2}Duboko učenje}{10}%
+\contentsline {subsubsection}{Prijenosne funkcije}{11}%
+\contentsline {subsubsection}{Povratne neuronske mreže}{11}%
+\contentsline {subsubsection}{Arhitektura ćelije s dugoročnom memorijom}{12}%
+\contentsline {section}{\numberline {3.3}Obrada ulaznih podataka}{13}%
+\contentsline {section}{\numberline {3.4}Značajke}{14}%
+\contentsline {subsection}{\numberline {3.4.1}Značajke u klasičnom pristupu}{14}%
+\contentsline {subsubsection}{Brojanje riječi i vektori riječi}{15}%
+\contentsline {subsubsection}{Polaritet i sentiment riječi}{16}%
+\contentsline {subsubsection}{Brojanje prisutnosti elemenata}{16}%
+\contentsline {subsection}{\numberline {3.4.2}Značajke u dubokom učenju}{17}%
+\contentsline {chapter}{\numberline {4}Provedba eksperimenata}{18}%
+\contentsline {section}{\numberline {4.1}Podatci}{18}%
+\contentsline {subsubsection}{Sastav}{19}%
+\contentsline {section}{\numberline {4.2}Eksperimentiranje}{19}%
+\contentsline {subsection}{\numberline {4.2.1}\gls {SVM}-model}{19}%
+\contentsline {subsection}{\numberline {4.2.2}\gls {LSTM}-model}{20}%
+\contentsline {subsubsection}{Optimizacijska funkcija}{21}%
+\contentsline {chapter}{\numberline {5}Zaključak}{22}%
+\contentsline {chapter}{Literatura}{23}%

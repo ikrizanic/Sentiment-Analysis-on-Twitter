@@ -1,4 +1,4 @@
-\begin{thebibliography}{16}
+\begin{thebibliography}{17}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -53,6 +53,11 @@ Liu Hu.
 Bojana Dalbelo~Bašić Jan~Šnajder.
 \newblock \emph{Strojno učenje}.
 \newblock 2014.
+
+\bibitem[Kingma i Ba(2014)]{adamoptimizer}
+Diederik~P Kingma i Jimmy Ba.
+\newblock Adam: A method for stochastic optimization.
+\newblock \emph{arXiv preprint arXiv:1412.6980}, 2014.
 
 \bibitem[Lozi{\'c} et~al.(2017)Lozi{\'c}, {\v{S}}ari{\'c}, Toki{\'c},
   Medi{\'c}, i {\v{S}}najder]{2017-takelab}

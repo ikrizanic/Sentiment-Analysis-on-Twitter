@@ -1,5 +1,5 @@
-This is BibTeX, Version 0.99d (TeX Live 2019/Arch Linux)
-Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+This is BibTeX, Version 0.99d (TeX Live 2019/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: zavrsni.aux
 The style file: fer.bst
 Database file #1: literatura.bib
@@ -16,45 +16,45 @@ Too many commas in name 1 of "Reimers, Nils, Gurevych, Iryna" for entry paramete
 while executing---line 1407 of file fer.bst
 Warning--empty journal in semeval2017task4
 Warning--empty publisher in cupic
-You've used 16 entries,
+You've used 17 entries,
             2773 wiz_defined-function locations,
-            683 strings with 7667 characters,
-and the built_in function-call counts, 6775 in all, are:
-= -- 614
-> -- 318
-< -- 14
-+ -- 112
-- -- 96
-* -- 473
-:= -- 1020
-add.period$ -- 58
-call.type$ -- 16
-change.case$ -- 78
-chr.to.int$ -- 16
-cite$ -- 37
-duplicate$ -- 344
-empty$ -- 597
-format.name$ -- 114
-if$ -- 1453
+            687 strings with 7784 characters,
+and the built_in function-call counts, 7138 in all, are:
+= -- 646
+> -- 339
+< -- 15
++ -- 119
+- -- 102
+* -- 496
+:= -- 1078
+add.period$ -- 61
+call.type$ -- 17
+change.case$ -- 83
+chr.to.int$ -- 17
+cite$ -- 39
+duplicate$ -- 363
+empty$ -- 627
+format.name$ -- 123
+if$ -- 1529
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 13
-newline$ -- 95
-num.names$ -- 64
-pop$ -- 202
+missing$ -- 14
+newline$ -- 100
+num.names$ -- 68
+pop$ -- 212
 preamble$ -- 1
-purify$ -- 64
+purify$ -- 68
 quote$ -- 0
-skip$ -- 266
+skip$ -- 282
 stack$ -- 0
-substring$ -- 199
-swap$ -- 57
+substring$ -- 201
+swap$ -- 58
 text.length$ -- 4
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 161
+type$ -- 172
 warning$ -- 5
-while$ -- 62
+while$ -- 65
 width$ -- 0
-write$ -- 220
+write$ -- 232
 (There were 4 error messages)
