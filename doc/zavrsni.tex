@@ -340,7 +340,11 @@ Svi eksperimenti u implementaciji metodama klasičnog strojnog učenja rade se n
 
 \subsection{\gls{LSTM}-model}
 
-Eksperimentiranje u implementaciji koja koristi metode dubokog učenja znatno je većeg opsega nego kod klasičnog strojnog učenja. \gls{LSTM} arhitektura \gls{RNN}-modela ima velik broj parametara koji se mogu konfigurirati, pa je stoga skup mogućih postava eksperimenata prevelik da bi se u realnom vremenu isprobao. Hiperparametri koji najznačajnije utječu na točnost predviđanja koju utrenirana neuronska mreža ostvaruje su sljedeći: broj neurona u \gls{LSTM} sloju, veličina mini serije (engl.~\emph{mini-batch}), broj \gls{LSTM} slojeva, odabir optimizacijske i propusne funkcije. Ostali hiperparametri koji su također mijenjani tjekom treniranja su: udio neurona koji se napuštaju (engl.~\emph{dropout}), stopa učenja (engl.~\emph{learning rate}), podrezivanje gradijenta (engl.~\emph{gradient-clipping}).
+Eksperimentiranje u implementaciji koja koristi metode dubokog učenja znatno je većeg opsega nego kod klasičnog strojnog učenja. \gls{LSTM} arhitektura \gls{RNN}-modela ima velik broj parametara koji se mogu konfigurirati, pa je stoga skup mogućih postava eksperimenata prevelik da bi se u realnom vremenu isprobao. Hiperparametri koji utječu na točnost predviđanja koju utrenirana neuronska mreža ostvaruje su sljedeći: broj neurona u \gls{LSTM} sloju, veličina mini serije (engl.~\emph{mini-batch}), broj \gls{LSTM} slojeva, odabir optimizacijske i propusne funkcije, udio neurona koji se napuštaju (engl.~\emph{dropout}), stopa učenja (engl.~\emph{learning rate}), podrezivanje gradijenta (engl.~\emph{gradient-clipping}) \citep{parameters}. Svi hiperparametri ne pridonose jednako poboljšanju točnosti, a zbog prevelikog broja kombinacija parametara, eksperimenti su provođeni u raznim etapama kako bi se što bolje precizirao skup eksperimenata koji donose najbolje rješenje. 
+
+\subsubsection{Optimizacijska funkcija}
+
+
 
 \chapter{Zaključak}
 

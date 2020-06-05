@@ -26,5 +26,6 @@
 \contentsline {section}{\numberline {4.2}Eksperimentiranje}{19}% 
 \contentsline {subsection}{\numberline {4.2.1}\gls {SVM}-model}{19}% 
 \contentsline {subsection}{\numberline {4.2.2}\gls {LSTM}-model}{20}% 
+\contentsline {subsubsection}{Optimizacijska funkcija}{21}% 
 \contentsline {chapter}{\numberline {5}Zaključak}{22}% 
 \contentsline {chapter}{Literatura}{23}% 

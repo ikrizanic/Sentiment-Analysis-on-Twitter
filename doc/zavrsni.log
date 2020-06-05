@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=latex 2020.5.8)  5 JUN 2020 00:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=latex 2020.5.8)  5 JUN 2020 16:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1028,21 +1028,26 @@ Underfull \hbox (badness 10000) in paragraph at lines 76--80
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 88--92
+Underfull \hbox (badness 10000) in paragraph at lines 94--98
 \T1/ptm/m/n/12 URL $\T1/pcr/m/n/12 https : / / www . omnicoreagency . com / twi
 tter-[]statistics/$\T1/ptm/m/n/12 .
  []
 
 ) (./zavrsni.gls [24]) [25
 
-] [26] (./zavrsni.aux) ) 
+] [26] (./zavrsni.aux
+
+Package natbib Warning: Citation(s) may have changed.
+(natbib)                Rerun to get citations correct.
+
+) ) 
 Here is how much of TeX's memory you used:
- 32235 strings out of 492168
- 749787 string characters out of 6131585
- 1021714 words of memory out of 5000000
- 36019 multiletter control sequences out of 15000+600000
+ 32238 strings out of 492168
+ 749841 string characters out of 6131585
+ 1021716 words of memory out of 5000000
+ 36022 multiletter control sequences out of 15000+600000
  61372 words of font info for 91 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  68i,10n,98p,4293b,2015s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on zavrsni.dvi (30 pages, 92820 bytes).
+Output written on zavrsni.dvi (30 pages, 93344 bytes).

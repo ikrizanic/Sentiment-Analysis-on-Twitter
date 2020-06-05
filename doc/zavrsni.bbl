@@ -1,4 +1,4 @@
-\begin{thebibliography}{15}
+\begin{thebibliography}{16}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -83,6 +83,12 @@ Razvan Pascanu, Tomas Mikolov, i Yoshua Bengio.
 \newblock On the difficulty of training recurrent neural networks.
 \newblock U \emph{International conference on machine learning}, stranice
   1310--1318, 2013.
+
+\bibitem[Reimers(2017)]{parameters}
+Gurevych~Iryna Reimers, Nils.
+\newblock Optimal hyperparameters for deep lstm-networks for sequence labeling
+  tasks.
+\newblock \emph{arXiv preprint arXiv:1707.06799}, 2017.
 
 \bibitem[{Salman Aslam}(2020)]{twitterStats}
 {Salman Aslam}.
