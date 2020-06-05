@@ -5,8 +5,8 @@
 \usepackage{graphicx}
 \graphicspath{ {./images/}}
 \usepackage{subfig}
-
-
+\usepackage{pgfplots}
+\pgfplotsset{width=10cm,compat=1.9}
 
 \makeglossaries
 
@@ -257,33 +257,94 @@ Ovo poglavlje opisuje proces provođenja eksperimenata i osvrće se na postignut
 Skup podataka za trening sastoji se od $49491$ mikroblogova, dok se skup podataka za testiranje sastoji od $12258$ mikroblogova. Podatci su odmah podijeljeni na one za treniranje i one za testiranje jer je sam skup podataka proizašao iz natjecanja \emph{Semeval 2017}, pa su korišteni originalni podatci za odgovarajuće faze natjecanja, tako da su rezultati postignuti na testnom skupu podataka mjerodavni onima koji su dobiveni kao rezultati natjecanja. Podatci se strukturno sastoje od identifikacijskih brojeva objava, oznake polariteta objave i teksta objave. Identifikacijske oznake izbačene su prilikom učitavanja jer niti jedna značajka ne proizlazi iz njih. 
 Primjer jedne originalne objave:\\\\
 \texttt{
-"(OFF TOPIC) - there is only 3 episodes on the first disk \\of \#Dexter. Please hurry, @netflix with the 2nd \#fitblog" 
+\footnotesize{"(OFF TOPIC) - there is only 3 episodes on the first disk of \#Dexter. Please hurry, @netflix with the 2nd \#fitblog" }
 }\\
 
-Ti su podatci obradom poprimili oblik prikladan izvlačenju značajki, pa je prethodno spomenuta objava pretvorena u dvije vrste podataka. Prva vrsta jest popis riječi koje se nalaze u objavi, a koje ne pripadaju zaustavnim riječim (enlg.~\emph{stop-words}), a druga vrsta je tekst koji sadrži oznake bitnih elemenata i svojstava objave. Primjer obje vrste podataka:\\\\
-\texttt{['topic', 'episode', 'first', 'disk', 'dexter', 'please',\\ 'hurry', 'fit', 'web', 'log']}\\\\
-\texttt{( <allcaps> off topic </allcaps> ) - there is only <number> episodes on the first disk \\of <hashtag> dexter </hashtag> . please hurry , <user> with the 2 nd <hashtag> fit blog </hashtag>}.
+\noindent Ti su podatci obradom poprimili oblik prikladan izvlačenju značajki, pa je prethodno spomenuta objava pretvorena u dvije vrste podataka. Prva vrsta jest popis riječi koje se nalaze u objavi, a koje ne pripadaju zaustavnim riječim (enlg.~\emph{stop-words}), a druga vrsta je tekst koji sadrži oznake bitnih elemenata i svojstava objave. Primjer obje vrste podataka:\\\\
+\texttt{\footnotesize{['topic', 'episode', 'first', 'disk', 'dexter', 'please', 'hurry', \\'fit', 'web', 'log']}}\\\\
+\footnotesize{\texttt{( <allcaps> off topic </allcaps> ) - there is only <number> episodes \\on the first disk of <hashtag> dexter </hashtag> . please hurry , \\<user> with the 2 nd <hashtag> fit blog </hashtag>}}.
+\normalsize
+\subsubsection{Sastav}
+Što se udjela podataka tiče, vidljiva je razlika u odnosu na skup podataka za treniranje i skup za testiranje. Mikroblogova neutralnog polariteta ima podjednako mnogo, ali u skupu za trening ima više nego dvostroku više pozitivno označenih mikroblogova nego negativnih, dok u skupu za testiranje ima $50\%$ više mikroblogova s negativnom oznakom. Precizni podatci o broju i udjelima mikrovlogova vidljivi su u tablici \ref{tablbroj}.
 
-\begin{table}
+\begin{table}[h]
 \centering
 \begin{tabular}{|l|l|l|l|} 
 \hline
-                     &pozitivni             &neutralni             &negativni                       \\ 
+                                      &pozitivni               &neutralni               &negativni            \\ 
 \hline
-Podatci za treniranje& 19652 (39.64\%) & 22195 (44.78\%) & 7723 (15.58\%)  \\ 
+Podatci za treniranje & 19652 (39.64\%) & 22195 (44.78\%) & 7723 (15.58\%) \\ 
 \hline
-Podatci za testiranje& 2375 (19.33\%)                   &                      &                       \\ 
+Podatci za testiranje  & 2375 (19.33\%)   & 5937 (48.33\%)   & 3972 (32.33\%)  \\ 
 \hline
-\multicolumn{1}{l}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l}{} 
-\caption{Zastupljenost polariteta mikroblogova u podatcima}
+\multicolumn{1}{l}{}  & \multicolumn{1}{l}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l}{} 
 \end{tabular}
+\caption{Zastupljenost polariteta mikroblogova u podatcima}
+\label{tablbroj}
 \end{table}
 
+\section{Eksperimentiranje}
+
+Metrika korištena u obje implementacije zasniva se na prosječnom odazivu (engl.~\emph{Average recall}) svake od tri klase u koje su se mikroblogovi trebali klasificirati. Formalno definirano metrika je sljedeća: \[ \mathit{rezultat} = \frac{(R^P + R^N + R^U)}{3},\] gdje su pribrojnici brojnika redom jednaki točnosti prepoznavanja pozitivnih, negativnih i neutralnih primjera. Korištena metrika odabrana je iz razloga što je korištena na poslijednjoj godini natjecanja \emph{Semeval} i zato što se bolje ponaša kod nebalansiranog skupa podataka kakav je skup na kojemu se vrši treniranje i testiranje u ovoj implementaciji.
+
+\subsection{\gls{SVM}-model}
+Svi eksperimenti u implementaciji metodama klasičnog strojnog učenja rade se na \gls{SVM}-modelu iz knjižnice \emph{scikit-learn}. Budući da su dostupni odvojeni podatci za treniranje i testiranje, ne vrši se križna validacija (engl.~\emph{cross-validation}), već se treniranje i testiranje odvija na zadanim podatcima. Jedini hiperparametar koji se može konfigurirati prilikom treniranja \gls{SVM}-modela s linearnom jezgrom jest parametar $c$ koji utječe na širinu maksimalne margine prilikom razdvajanja klasa u podatcima. Odabir manje vrijednosti hiperparametra $c$ utječe na povećanje širine maksimalne margine, ali kao posljedicu ostavlja dio podataka pogrešno razdijeljen. Odabirom veće vrijednosti smanjuje se širina maksimalne margine hiperravnine, ali zato manje podataka biva krivo razdijeljeno tijekom treniranja. Vrijednosti hiperparametra $c$ koje ima smisla probati dolaze iz iznimno širokog intervala, stoga se u ovoj implementaciji vrši treniranje za vrijednosti hiperparametra od $10^{-7}$ do $10^{15}$ povećavajući vrijednost parametra $10$ ili $100$ puta svakom iteracijom. Početni se model temelji na metodi vreće riječi (engl.~\emph{Bag-of-words}), odnosno na primjeni metode \emph{Tf-Idf}. Najgori mogući model nasumičnog pogađanja imao bi točnost od $33.32\%$, a početni model ima točnost od $39.85\%$ što ga čini korektnim počentim modelom. S obzirom na to da je razvoj značaka opisan u ranijim poglavljima, a jedini hiperparametar je $c$, rezultati eksperimenata sa značajkama opisani su na tablici \ref{tablesvm}, a utjecaj hiperparametra $c$ na točnost prikazan je slikom \ref{tablec}. Model postiže identičnu točnost s vrijednostima hiperparametra $10^2$ i $10^6$ koja iznosi $62.32\%$. Vrijednosti manje od $10^{-1}$ nisu prikazane na grafu, iako je proveden eksperiment i s njima, ali rezultat je znatno lošiji.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|} 
+\hline
+\small{Značajke}  &\small{Rezultat}       \\ 
+\hline
+\small{\emph{Tf-Idf} (\emph{Bag-of-Words})}& 39.85\% \\ 
+\hline
+\small{\emph{Spacy} vektori riječi}  & 60.90\%  \\ 
+\hline
+\small{{Spacy} vektori riječi + \emph{ANEW} + polaritet riječi}  & 61.91\%   \\ 
+\hline
+\small{{Spacy} vektori riječi + \emph{ANEW} + polaritet riječi + značajke prebrojavanja}  & 62.32\%   \\ 
+\hline
+\multicolumn{1}{l}{}  & \multicolumn{1}{l}{} 
+\end{tabular}
+\caption{Rezultati eksperimenata \gls{SVM}-modela}
+\label{tablesvm}
+\end{table}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    xlabel={Potencija parametra ($10^n$)},
+    ylabel={Točnost[\%]},
+    xmin=-1, xmax=15,
+    ymin=62.2, ymax=62.4,
+    xtick={ -1, 0, 1,  2, 3, 4,5, 6,7,8 ,9,10,11, 12, 13,14,15},
+    ytick={62.2, 62.25, 62.3, 62.35, 62.4},
+    legend pos=north west,
+    ymajorgrids=true,
+    grid style=dashed,
+]
+
+\addplot[
+    color=red,
+    ]
+    coordinates {
+    ( -1,62.27)( 0,62.23)( 1,62.31)(  2,62.32)( 3,62.29)( 4,62.28)(6,62.32)( 9,62.28)( 12,62.29)( 15,62.29)
+    };
+    
+\end{axis}
+\end{tikzpicture}
+\caption{Utjecaj hiperparemetra $c$ na točnost SVM-modela}
+\label{tablec}
+\end{figure}
+
+\subsection{\gls{LSTM}-model}
+
+Eksperimentiranje u implementaciji koja koristi metode dubokog učenja znatno je većeg opsega nego kod klasičnog strojnog učenja. \gls{LSTM} arhitektura \gls{RNN}-modela ima velik broj parametara koji se mogu konfigurirati, pa je stoga skup mogućih postava eksperimenata prevelik da bi se u realnom vremenu isprobao. Hiperparametri koji najznačajnije utječu na točnost predviđanja koju utrenirana neuronska mreža ostvaruje su sljedeći: broj neurona u \gls{LSTM} sloju, veličina mini serije (engl.~\emph{mini-batch}), broj \gls{LSTM} slojeva, odabir optimizacijske i propusne funkcije. Ostali hiperparametri koji su također mijenjani tjekom treniranja su: udio neurona koji se napuštaju (engl.~\emph{dropout}), stopa učenja (engl.~\emph{learning rate}), podrezivanje gradijenta (engl.~\emph{gradient-clipping}).
 
 \chapter{Zaključak}
 
 %TODO
-
 \bibliography{literatura}
 \bibliographystyle{fer}
 \printglossaries
