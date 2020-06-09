@@ -1,8 +1,6 @@
 import re
 import pandas as pd
 import string
-from tqdm import tqdm
-
 
 def remove_punctuation(raw):
     return raw.translate(str.maketrans('', '', string.punctuation))
@@ -114,7 +112,7 @@ def replace_useful_emoticons(raw):
 
 def remove_duplicates(csv_data):
     clean_data = dict()
-    for i in tqdm((range(len(csv_data)))):
+    for i in (range(len(csv_data))):
         if csv_data.text[i] not in clean_data and isinstance(csv_data.text[i], str):
             clean_data.update({csv_data.text[i]: csv_data.label[i]})
     return clean_data

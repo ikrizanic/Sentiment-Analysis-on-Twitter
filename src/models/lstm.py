@@ -1,12 +1,14 @@
 from keras.models import Sequential
-from keras.layers import LSTM, Dense, Dropout, Masking, Embedding
+from keras.layers import LSTM, Dense, Dropout, Masking, Embedding, Bidirectional
 import tensorflow as tf
 from keras.callbacks import EarlyStopping, ModelCheckpoint
 from keras.utils import to_categorical
+from tqdm.keras import TqdmCallback
 
 
 def compile_model(vocab, embedding_matrix, input_length,
                   trainable=False,
+                  batch_size=2048,
                   recurrent_layer_size=256,
                   dense_size=256,
                   dropout=0.1,
@@ -27,26 +29,23 @@ def compile_model(vocab, embedding_matrix, input_length,
                   trainable=False,
                   mask_zero=True))
 
-    # Masking layer for pre-trained embeddings
+    # Masking layer
     model.add(Masking(mask_value=0.0))
 
-    # Recurrent layer
-    model.add(LSTM(recurrent_layer_size, return_sequences=False, dropout=dropout, recurrent_dropout=recurrent_dropout,
-                   input_shape=(2048, 28, 300)))
-    # model.add(LSTM(recurrent_layer_size, return_sequences=True, dropout=dropout, recurrent_dropout=recurrent_dropout))
-    #
-    # model.add(LSTM(int(recurrent_layer_size / 2), return_sequences=False))
+    # LSTM layer
+    model.add(Bidirectional(
+        LSTM(recurrent_layer_size, return_sequences=True, dropout=dropout, recurrent_dropout=recurrent_dropout,
+             input_shape=(batch_size, 28, 300))))
 
-    # Fully connected layer
-    model.add(Dense(dense_size, activation=dense_activation))
+    # model.add(Bidirectional(
+    #     LSTM(recurrent_layer_size, return_sequences=True)))
 
-    # Dropout for regularization
-    model.add(Dropout(dropout_for_regularization))
+    model.add(Bidirectional(
+        LSTM(recurrent_layer_size, return_sequences=False)))
 
-    # Output layer
+    # output
     model.add(Dense(3, activation=output_activation))
 
-    # Compile the model
     model.compile(
         optimizer=optimizer,
         loss=loss,
@@ -57,11 +56,11 @@ def compile_model(vocab, embedding_matrix, input_length,
 # CHANGE PATH FOR SERVER
 local = "/home/ivan/Documents/git_repos/Sentiment-Analysis-on-Twitter/models/model.h5"
 djurdja = '/home/ikrizanic/pycharm/zavrsni/models/model.h5'
-callbacks = [EarlyStopping(monitor='val_loss', patience=20),
-             ModelCheckpoint(local)]
+
+callbacks = [EarlyStopping(monitor='val_loss', patience=3), ModelCheckpoint(djurdja)]
 
 
-def fit_model(model, X_train, y_train, X_val, y_val, batch_size=2048, epochs=200):
+def fit_model(model, X_train, y_train, X_val, y_val, batch_size=128, epochs=200):
     history = model.fit(X_train, y_train,
                         batch_size=batch_size, epochs=epochs,
                         callbacks=callbacks,
@@ -72,6 +71,7 @@ def fit_model(model, X_train, y_train, X_val, y_val, batch_size=2048, epochs=200
 def evaluate_model(model, X_test, y_test):
     res = model.evaluate(X_test, y_test)
     return res
+
 
 def calc_recall(model, test_features, test_labels, path=""):
     import numpy as np

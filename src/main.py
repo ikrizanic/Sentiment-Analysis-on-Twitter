@@ -1,18 +1,17 @@
-import pandas as pd
-import tensorflow as tf
-import tqdm
-import sklearn
 from keras.utils import to_categorical
 from src.hooks.various_functions import *
 from src.load_data.pickle_functions import *
 from src.models.lstm import *
-
+from sys import argv
+from tensorflow import keras
 
 # change spellcheck path, and path in lstm (model.h5)
 def main():
     local_path = "/home/ivan/Documents/git_repos/Sentiment-Analysis-on-Twitter/data"
-    djurdja_path = "/home/ikrizanic/pycharm/zavrsni/data"
-    working_path = local_path
+    working_path = "/home/ikrizanic/pycharm/zavrsni/data"
+    if len(argv) == 2:
+        working_path = local_path
+
     data_paths = {"train_dataset": working_path + "/lstm/train_dataset.pl",
                   "input_dataset": working_path + "/lstm/input_dataset.pl",
                   "input_labels": working_path + "/lstm/input_labels.pl",
@@ -81,7 +80,7 @@ def main():
         embedding_matrix = pickle.load(f)
     print("Done")
 
-    X_train, X_val, y_train, y_val = train_test_split(train_features, train_labels, test_size=0.1, random_state=25,
+    X_train, X_val, y_train, y_val = train_test_split(train_features, train_labels, test_size=0.2, random_state=25,
                                                       shuffle=True)
 
     y_train = to_categorical(y_train)
@@ -89,29 +88,6 @@ def main():
     test_labels = to_categorical(test_labels)
 
     max_len = max(x for x in [len(d) for d in enc_train_data])
-
-    # single run
-    cce = tf.keras.losses.CategoricalCrossentropy()
-    sq_hinge = tf.keras.losses.SquaredHinge(reduction="auto", name="squared_hinge")
-    model = compile_model(train_vocab, embedding_matrix, max_len,
-                          recurrent_layer_size=20,
-                          dense_size=20,
-                          dropout=0,
-                          recurrent_dropout=0,
-                          dense_activation='relu',
-                          dropout_for_regularization=0,
-                          output_activation='softmax',
-                          optimizer='Adam',
-                          loss=cce
-                          )
-
-    # history, model = fit_model(model, X_train, y_train, X_val, y_val, batch_size=2048, epochs=5)
-    #
-    # result = evaluate_model(model, test_features, test_labels)
-    # print(result)
-    # x_1, x_2, y_1, y_2 = sklearn.model_selection.train_test_split(test_features, test_labels, random_state=13)
-    # recall = calc_recall(model, x_1, y_1)
-    # recall = calc_recall(model, x_2, y_2)
 
     # multiple runs
     data = {
@@ -126,19 +102,19 @@ def main():
         "y_test": test_labels
     }
 
-    rls = [512]
-    dense_size = [512]
-    epochs = [100]
-    dropout = [0]
+    rls = [30]
+    batch_size = [32]
+    epochs = [10]
+    dropout = [0.5]
     dense_activation = ['relu']
     dropout_for_reg = [0]
     output_activation = ['softmax']
-    optimizer = ['adam']
-    loss = [tf.keras.losses.CategoricalCrossentropy()]
-
+    optimizer = [keras.optimizers.Adam()]
+    loss = [keras.losses.CategoricalCrossentropy()]
+    # loss = [tf.keras.losses.SquaredHinge(reduction="auto", name="squared_hinge")]
     params_list = list()
-    for r in rls:
-        for ds in dense_size:
+    for batch in batch_size:
+        for r in rls:
             for dr in dropout:
                 for da in dense_activation:
                     for drop_reg in dropout_for_reg:
@@ -148,24 +124,23 @@ def main():
                                     for ep in epochs:
                                         params_list.append({
                                             "recurrent_layer_size": r,
-                                            "dense_size": ds,
                                             "dropout": dr,
                                             "dense_activation": da,
                                             "dropout_for_reg": drop_reg,
                                             "output_activation": oa,
                                             "optimizer": opt,
                                             "loss": ls,
-                                            "epochs": ep
+                                            "epochs": ep,
+                                            "batch": batch
                                         })
 
     for params in params_list:
-        test_model(data, params, working_path + "/results/24_5_512.txt")
-
+        # test_model(data, params, working_path + "/results/random_tests64.txt")
+        test_epoch_by_epoch(data, params, working_path + "/results/8_6_30n_32b_cc.txt")
 
 def test_model(data, params, working_path):
     model = compile_model(data["train_vocab"], data["embedding_matrix"], data["max_len"],
                           recurrent_layer_size=params["recurrent_layer_size"],
-                          dense_size=params["dense_size"],
                           dropout=params["dropout"],
                           recurrent_dropout=params["dropout"],
                           dense_activation=params["dense_activation"],
@@ -174,17 +149,14 @@ def test_model(data, params, working_path):
                           optimizer=params["optimizer"],
                           loss=params["loss"]
                           )
-    history, model = fit_model(model, data['x_t'], data['y_t'], data["x_v"], data['y_v'], epochs=params['epochs'])
+    history, model = fit_model(model, data['x_t'], data['y_t'], data["x_v"], data['y_v'], epochs=params['epochs'],
+                               batch_size=params['batch'])
 
-    result = evaluate_model(model, data['x_test'], data['y_test'])
-    print(result)
     recall = calc_recall(model, data['x_test'], data['y_test'], path=working_path)
     print(recall)
 
     p_out = ""
     for k, v in params.items():
-        if k == "loss":
-            continue
         p_out += "\n{:20s}{:20s}".format(str(k), str(v))
 
     # add path
@@ -194,6 +166,39 @@ def test_model(data, params, working_path):
         myfile.write("Recall:" + str(recall) + "\n")
         myfile.write("-" * 80)
         myfile.write("\n")
+
+def test_epoch_by_epoch(data, params, working_path):
+    model = compile_model(data["train_vocab"], data["embedding_matrix"], data["max_len"],
+                          dropout=params["dropout"],
+                          recurrent_dropout=params["dropout"],
+                          dense_activation=params["dense_activation"],
+                          dropout_for_regularization=params["dropout_for_reg"],
+                          output_activation=params["output_activation"],
+                          optimizer=params["optimizer"],
+                          loss=params["loss"]
+                          )
+    p_out = ""
+    for k, v in params.items():
+        p_out += "\n{:20s}{:20s}".format(str(k), str(v))
+
+    # add path
+    with open(working_path, "a") as myfile:
+        myfile.write("-" * 80)
+        myfile.write(p_out)
+        myfile.write("\n")
+
+    for i in range(params['epochs']):
+        history, model = fit_model(model, data['x_t'], data['y_t'], data["x_v"], data['y_v'], epochs=1,
+                                   batch_size=params['batch'])
+
+        recall = calc_recall(model, data['x_test'], data['y_test'], path=working_path)
+        print(recall)
+
+        with open(working_path, "a") as myfile:
+            myfile.write("-" * 80)
+            myfile.write("Recall:" + str(recall) + "\nIn epoch: " + str(i+1) + "\n")
+            myfile.write("=" * 80)
+            myfile.write("\n")
 
 
 if __name__ == '__main__':

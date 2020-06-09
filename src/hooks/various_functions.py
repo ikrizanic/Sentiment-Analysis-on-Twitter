@@ -66,12 +66,12 @@ def split_train_validate_test(data, labels, train_valtest_ratio, validate_test_r
     return X_train, X_validate, X_test, y_train, y_validate, y_test
 
 
-init_emoji("/home/ivan/Documents/git_repos/Sentiment-Analysis-on-Twitter/data/emoticons.txt")
+# init_emoji("/home/ivan/Documents/git_repos/Sentiment-Analysis-on-Twitter/data/emoticons.txt")
 
 
 def process_dataset(data):
     dataset = list()
-    for i in tqdm(range(len(data))):
+    for i in range(len(data)):
         new_tweet = repair_chars(data[i])
         anot = copy.deepcopy(new_tweet)
         anot = new_tweet

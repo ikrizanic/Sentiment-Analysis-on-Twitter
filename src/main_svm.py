@@ -66,8 +66,8 @@ def main():
     with open("/home/ivan/Documents/git_repos/Sentiment-Analysis-on-Twitter/data/svm/embedding_matrix.pl", "rb") as f:
         embedding_matrix = pickle.load(f)
     data = [d['anot_tokens'] for d in train_dataset]
-    train_features_bow = bow_averaged_embeddings(data, train_vocab, embedding_matrix)
-    test_features_bow = bow_averaged_embeddings([d['anot_tokens'] for d in test_dataset], train_vocab, embedding_matrix)
+    # train_features_bow = bow_averaged_embeddings(data, train_vocab, embedding_matrix)
+    # test_features_bow = bow_averaged_embeddings([d['anot_tokens'] for d in test_dataset], train_vocab, embedding_matrix)
     print("Done")
 
     # dump_dataset(train_features_bow, data_paths["train_features_bow"])
@@ -77,34 +77,35 @@ def main():
 
     for i in range(len(train_features)):
         train_features[i].extend(train_features_bow[i])
-        train_features[i].extend(train_boolean_features[i])
-        train_features[i].extend(train_general_features[i])
+        # train_features[i].extend(train_boolean_features[i])
+        # train_features[i].extend(train_general_features[i])
 
     for i in range(len(test_features)):
         test_features[i].extend(test_features_bow[i])
-        test_features[i].extend(test_boolean_features[i])
-        test_features[i].extend(test_general_features[i])
+        # test_features[i].extend(test_boolean_features[i])
+        # test_features[i].extend(test_general_features[i])
 
-    # max_len = max([len(t) for t in train_features_bow])
-    # train_features = pad_encoded_data(train_features, max_len)
-    # test_features = pad_encoded_data(test_features, max_len)
+    max_len = max([len(t) for t in train_features_bow])
+    train_features = pad_encoded_data(train_features, max_len)
+    test_features = pad_encoded_data(test_features, max_len)
 
-    # print("SVC linear cross in progress...")
-    # mean, deviation = svc_linear_cross(train_features, train_labels)
-    # print("Accuracy mean of svc_linear is %0.2f , and deviation is %0.2f" % (mean,  deviation))
+    for i in range(len(train_features)):
+        for j in range(len(train_features[i])):
+            train_features[i][j] = float(train_features[i][j]) / len(train_vocab)
+    for i in range(len(test_features)):
+        for j in range(len(test_features[i])):
+            test_features[i][j] = float(test_features[i][j]) / len(train_vocab)
 
-    # for i in range(len(train_features)):
-    #     for j in range(len(train_features[i])):
-    #         train_features[i][j] = float(train_features[i][j]) / len(train_vocab)
-    # for i in range(len(test_features)):
-    #     for j in range(len(test_features[i])):
-    #         test_features[i][j] = float(test_features[i][j]) / len(train_vocab)
-
-    print(test_features[10])
-    print(train_features[10])
     print("SVC linear in progress...")
-    recall = svc_linear(train_features, train_labels, test_features, test_labels, C=0.05)
-    print("Recall: {:5.3f}".format(recall))
+    parallel_svm(train_features, train_labels, test_features, test_labels, C=0.01)
+
+
+    # for c in [10**-7, 10**-5, 10**-3, 10**-1, 1, 10, 10**2, 10**3, 10**4, 10**6, 10**9, 10**12, 10**15]:
+    # for c in [100]:
+    #     print("SVC linear in progress...{}".format(c))
+    #     recall = svc_linear(train_features, train_labels, test_features, test_labels, C=float(c))
+    #     print("Recall: {:5.3f}".format(recall))
+    #     print("*" * 80)
     # mean, deviation = svc_linear_cross(train_features, train_labels)
     # print("Accuracy mean of svc_linear is %0.2f , and deviation is %0.2f" % (mean,  deviation))
 

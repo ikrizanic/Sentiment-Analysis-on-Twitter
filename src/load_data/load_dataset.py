@@ -1,7 +1,4 @@
 import spacy
-from podium.storage import Vocab, Field, LabelField
-from podium.datasets import TabularDataset
-
 from src.hooks.spell_check import *
 from src.hooks.annotation_normalization import *
 from src.hooks.pretokenization import *
