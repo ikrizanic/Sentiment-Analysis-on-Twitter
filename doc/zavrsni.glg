@@ -1,7 +1,7 @@
 This is makeindex, version 2.15 [TeX Live 2019] (kpathsea + Thai support).
 Scanning style file ./zavrsni.ist.............................done (29 attributes redefined, 0 ignored).
-Scanning input file zavrsni.glo....done (16 entries accepted, 0 rejected).
-Sorting entries....done (64 comparisons).
-Generating output file zavrsni.gls....done (20 lines written, 0 warnings).
+Scanning input file zavrsni.glo....done (68 entries accepted, 0 rejected).
+Sorting entries....done (420 comparisons).
+Generating output file zavrsni.gls....done (39 lines written, 0 warnings).
 Output written in zavrsni.gls.
 Transcript written in zavrsni.glg.

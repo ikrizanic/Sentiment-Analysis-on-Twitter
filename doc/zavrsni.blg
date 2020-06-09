@@ -1,60 +1,51 @@
-This is BibTeX, Version 0.99d (TeX Live 2019/Debian)
-Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+This is BibTeX, Version 0.99d (TeX Live 2019/Arch Linux)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: zavrsni.aux
 The style file: fer.bst
 Database file #1: literatura.bib
-Too many commas in name 1 of "Reimers, Nils, Gurevych, Iryna" for entry parameters
-while executing---line 1325 of file fer.bst
-Too many commas in name 1 of "Reimers, Nils, Gurevych, Iryna" for entry parameters
-while executing---line 1325 of file fer.bst
-Warning--empty year in anew_code
 Warning--empty publisher in strojno_skripta
 Warning--empty year in akt
-Too many commas in name 1 of "Reimers, Nils, Gurevych, Iryna" for entry parameters
-while executing---line 1407 of file fer.bst
-Too many commas in name 1 of "Reimers, Nils, Gurevych, Iryna" for entry parameters
-while executing---line 1407 of file fer.bst
 Warning--empty journal in semeval2017task4
 Warning--empty publisher in cupic
-You've used 17 entries,
+You've used 21 entries,
             2773 wiz_defined-function locations,
-            687 strings with 7784 characters,
-and the built_in function-call counts, 7138 in all, are:
-= -- 646
-> -- 339
-< -- 15
-+ -- 119
-- -- 102
-* -- 496
-:= -- 1078
-add.period$ -- 61
-call.type$ -- 17
-change.case$ -- 83
-chr.to.int$ -- 17
-cite$ -- 39
-duplicate$ -- 363
-empty$ -- 627
-format.name$ -- 123
-if$ -- 1529
+            712 strings with 9191 characters,
+and the built_in function-call counts, 10554 in all, are:
+= -- 895
+> -- 773
+< -- 17
++ -- 264
+- -- 243
+* -- 834
+:= -- 1656
+add.period$ -- 75
+call.type$ -- 21
+change.case$ -- 141
+chr.to.int$ -- 21
+cite$ -- 46
+duplicate$ -- 429
+empty$ -- 755
+format.name$ -- 271
+if$ -- 2193
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 14
-newline$ -- 100
-num.names$ -- 68
-pop$ -- 212
+missing$ -- 15
+newline$ -- 122
+num.names$ -- 84
+pop$ -- 331
 preamble$ -- 1
-purify$ -- 68
+purify$ -- 122
 quote$ -- 0
-skip$ -- 282
+skip$ -- 383
 stack$ -- 0
-substring$ -- 201
-swap$ -- 58
+substring$ -- 209
+swap$ -- 64
 text.length$ -- 4
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 172
-warning$ -- 5
-while$ -- 65
+type$ -- 216
+warning$ -- 4
+while$ -- 77
 width$ -- 0
-write$ -- 232
-(There were 4 error messages)
+write$ -- 286
+(There were 4 warnings)

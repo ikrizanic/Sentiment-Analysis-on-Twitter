@@ -1,5 +1,5 @@
 \relax 
-\@nameuse{bbl@beforestart}
+\bbl@beforestart
 \providecommand\@newglossary[4]{}
 \@newglossary{main}{glg}{gls}{glo}
 \providecommand\@glsorder[1]{}
@@ -13,7 +13,7 @@
 \@writefile{lot}{\addvspace {10\p@ }}
 \citation{semeval2017task4}
 \citation{cliche-2017-bb}
-\@writefile{toc}{\contentsline {chapter}{\numberline {2}Povezani radovi}{3}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {2}Srodni radovi}{3}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {section}{\numberline {2.1}Rad tima \emph  {BB\_twtr} - najuspješniji model današnjice}{3}\protected@file@percent }
@@ -75,35 +75,65 @@
 \@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Zastupljenost polariteta mikroblogova u podatcima\relax }}{19}\protected@file@percent }
 \newlabel{tablbroj}{{4.1}{19}}
 \@writefile{toc}{\contentsline {section}{\numberline {4.2}Eksperimentiranje}{19}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}\gls {SVM}-model}{19}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Problem prenaučenosti i nedovoljne naučenosti}{19}\protected@file@percent }
+\citation{al-masri_2019}
+\citation{al-masri_2019}
+\newlabel{overfit}{{4.1a}{20}}
+\newlabel{sub@overfit}{{(a)}{a}}
+\newlabel{underfit}{{4.1b}{20}}
+\newlabel{sub@underfit}{{(b)}{b}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Greške u treniranju modela \citep  {al-masri_2019}\relax }}{20}\protected@file@percent }
+\newlabel{greskeutreningu}{{4.1}{20}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}\gls {SVM}-model}{20}\protected@file@percent }
 \citation{parameters}
-\@writefile{lot}{\contentsline {table}{\numberline {4.2}{\ignorespaces Rezultati eksperimenata \gls {SVM}-modela\relax }}{20}\protected@file@percent }
-\newlabel{tablesvm}{{4.2}{20}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}\gls {LSTM}-model}{20}\protected@file@percent }
-\citation{adamoptimizer}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Utjecaj hiperparemetra $c$ na točnost SVM-modela\relax }}{21}\protected@file@percent }
-\newlabel{tablec}{{4.1}{21}}
-\@writefile{toc}{\contentsline {subsubsection}{Optimizacijska funkcija}{21}\protected@file@percent }
-\bibdata{literatura}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Zaključak}{22}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.2}{\ignorespaces Rezultati eksperimenata \gls {SVM}-modela\relax }}{21}\protected@file@percent }
+\newlabel{tablesvm}{{4.2}{21}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Utjecaj hiperparemetra $c$ na točnost SVM-modela\relax }}{21}\protected@file@percent }
+\newlabel{tablec}{{4.2}{21}}
+\citation{kingma2014adam}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}\gls {LSTM}-model}{22}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Jednosmjerna i dvosmjerna varijanta \gls {LSTM} arhitekture}{22}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Optimizacijska funkcija i stopa učenja}{22}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Broj neurona u sloju i broj \gls {LSTM} slojeva}{23}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Napuštanje neurona}{23}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.3}{\ignorespaces Utjecaj hiperparametra $\alpha $ na točnost \gls {LSTM}-modela\relax }}{24}\protected@file@percent }
+\newlabel{dropout}{{4.3}{24}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.4}{\ignorespaces Utjecaj veličine mini-serije na točnost \gls {LSTM}-modela\relax }}{24}\protected@file@percent }
+\newlabel{minibatch}{{4.4}{24}}
+\@writefile{toc}{\contentsline {subsubsection}{Veličina mini-serije}{24}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Funkcija gubitka}{24}\protected@file@percent }
+\citation{chollet2015keras}
+\citation{tensorflow2015-whitepaper}
+\@writefile{toc}{\contentsline {subsubsection}{Podrezivanje gradijenta}{25}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Programska implementacija}{25}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Osvrt na rezultate}{25}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.5}{\ignorespaces Točnost modela po klasama \relax }}{26}\protected@file@percent }
+\newlabel{pocetakkraj}{{4.5}{26}}
+\citation{losirez}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Zaključak}{27}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\bibcite{datastories-Semeval}{{1}{2017}{{Baziotis et~al.}}{{Baziotis, Pelekis, i Doulkeridis}}}
-\bibcite{nltk}{{2}{2009}{{Bird et~al.}}{{Bird, Klein, i Loper}}}
-\bibcite{anew}{{3}{1999}{{Bradley i Lang}}{{}}}
-\bibcite{cliche-2017-bb}{{4}{2017}{{Cliche}}{{}}}
-\bibcite{anew_code}{{5}{}{{Doris Zhou}}{{}}}
-\bibcite{leksikon}{{6}{2006}{{Hu}}{{}}}
-\bibcite{strojno_skripta}{{7}{2014}{{Jan~Šnajder}}{{}}}
-\bibcite{adamoptimizer}{{8}{2014}{{Kingma i Ba}}{{}}}
-\bibcite{2017-takelab}{{9}{2017}{{Lozi{\'c} et~al.}}{{Lozi{\'c}, {\v {S}}ari{\'c}, Toki{\'c}, Medi{\'c}, i {\v {S}}najder}}}
-\@writefile{toc}{\contentsline {chapter}{Literatura}{23}\protected@file@percent }
-\bibcite{w2v}{{10}{2015}{{Mikolov et~al.}}{{Mikolov, Chen, Corrado, i Dean}}}
-\bibcite{akt}{{11}{}{{Ng}}{{}}}
-\bibcite{rnn_training}{{12}{2013}{{Pascanu et~al.}}{{Pascanu, Mikolov, i Bengio}}}
-\bibcite{parameters}{{13}{2017}{{Reimers}}{{}}}
-\bibcite{twitterStats}{{14}{2020}{{Salman Aslam}}{{}}}
-\bibcite{semeval2017task4}{{15}{2017}{{Sara Rosenthal, Noura Farra, Preslav Nakov}}{{}}}
-\bibcite{anew2}{{16}{2013}{{Warriner et~al.}}{{Warriner, Kuperman, i Brysbaert}}}
-\bibcite{cupic}{{17}{2016}{{Čupić}}{{}}}
+\bibdata{literatura}
+\bibcite{tensorflow2015-whitepaper}{{1}{2015}{{Abadi et~al.}}{{Abadi, Agarwal, Barham, Brevdo, Chen, Citro, Corrado, Davis, Dean, Devin, Ghemawat, Goodfellow, Harp, Irving, Isard, Jia, Jozefowicz, Kaiser, Kudlur, Levenberg, Man\'{e}, Monga, Moore, Murray, Olah, Schuster, Shlens, Steiner, Sutskever, Talwar, Tucker, Vanhoucke, Vasudevan, Vi\'{e}gas, Vinyals, Warden, Wattenberg, Wicke, Yu, i Zheng}}}
+\bibcite{al-masri_2019}{{2}{2019}{{Al-Masri}}{{}}}
+\bibcite{datastories-Semeval}{{3}{2017}{{Baziotis et~al.}}{{Baziotis, Pelekis, i Doulkeridis}}}
+\bibcite{nltk}{{4}{2009}{{Bird et~al.}}{{Bird, Klein, i Loper}}}
+\bibcite{anew}{{5}{1999}{{Bradley i Lang}}{{}}}
+\bibcite{chollet2015keras}{{6}{2015}{{Chollet et~al.}}{{}}}
+\bibcite{cliche-2017-bb}{{7}{2017}{{Cliche}}{{}}}
+\@writefile{toc}{\contentsline {chapter}{Literatura}{29}\protected@file@percent }
+\bibcite{anew_code}{{8}{2020}{{Doris Zhou}}{{}}}
+\bibcite{leksikon}{{9}{2006}{{Hu}}{{}}}
+\bibcite{strojno_skripta}{{10}{2014}{{Jan~Šnajder}}{{}}}
+\bibcite{kingma2014adam}{{11}{2014}{{Kingma i Ba}}{{}}}
+\bibcite{2017-takelab}{{12}{2017}{{Lozi{\'c} et~al.}}{{Lozi{\'c}, {\v {S}}ari{\'c}, Toki{\'c}, Medi{\'c}, i {\v {S}}najder}}}
+\bibcite{w2v}{{13}{2015}{{Mikolov et~al.}}{{Mikolov, Chen, Corrado, i Dean}}}
+\bibcite{akt}{{14}{}{{Ng}}{{}}}
+\bibcite{rnn_training}{{15}{2013}{{Pascanu et~al.}}{{Pascanu, Mikolov, i Bengio}}}
+\bibcite{parameters}{{16}{2017}{{Reimers i Gurevych}}{{}}}
+\bibcite{twitterStats}{{17}{2020}{{Salman Aslam}}{{}}}
+\bibcite{semeval2017task4}{{18}{2017}{{Sara Rosenthal, Noura Farra, Preslav Nakov}}{{}}}
+\bibcite{anew2}{{19}{2013}{{Warriner et~al.}}{{Warriner, Kuperman, i Brysbaert}}}
+\bibcite{losirez}{{20}{2018}{{Zimbra et~al.}}{{Zimbra, Abbasi, i Zeng}}}
+\bibcite{cupic}{{21}{2016}{{Čupić}}{{}}}
 \bibstyle{fer}
